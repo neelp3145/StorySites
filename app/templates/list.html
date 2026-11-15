@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Inquiries — {{ app_name }}{% endblock %}
+{% block content %}
+<h1>Inquiries</h1>
+<div class="filters">
+  <a href="/admin" class="{% if status_filter == 'all' %}active{% endif %}">All</a>
+  {% for s in statuses %}
+    <a href="/admin?status_filter={{ s }}" class="{% if status_filter == s %}active{% endif %}">{{ s }}</a>
+  {% endfor %}
+</div>
+<div class="card">
+  {% if inquiries %}
+  <table>
+    <thead>
+      <tr>
+        <th>When</th>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in inquiries %}
+      <tr>
+        <td class="muted">{{ item.created_at.strftime('%Y-%m-%d %H:%M') if item.created_at else '' }}</td>
+        <td>
+          <a href="/admin/inquiries/{{ item.id }}"><strong>{{ item.full_name }}</strong></a><br />
+          <span class="muted">{{ item.email }}</span>
+        </td>
+        <td>
+          {{ item.request_type }}<br />
+          <span class="muted">{{ item.service_type }}</span>
+        </td>
+        <td><span class="badge {{ item.status.value }}">{{ item.status.value }}</span></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="muted">No inquiries yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

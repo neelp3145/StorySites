@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}{{ app_name }}{% endblock %}</title>
+  <style>
+    :root {
+      --bg: #f6f4f1;
+      --ink: #1a1a1a;
+      --muted: #5c5c5c;
+      --accent: #e85d2c;
+      --card: #ffffff;
+      --line: #e2ddd6;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.45;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--line);
+      background: var(--card);
+    }
+    header .brand { font-weight: 700; letter-spacing: 0.04em; }
+    main { max-width: 960px; margin: 1.5rem auto; padding: 0 1rem 3rem; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.35rem; }
+    input, select, textarea, button {
+      font: inherit;
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    button, .btn {
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      width: auto;
+      padding: 0.65rem 1rem;
+    }
+    button.secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    .field { margin-bottom: 1rem; }
+    .error { color: #b42318; margin-bottom: 1rem; }
+    .ok { color: #027a48; margin-bottom: 1rem; }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 0.75rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+    .filters { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .filters a {
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: #fff;
+    }
+    .filters a.active { background: var(--ink); color: #fff; border-color: var(--ink); text-decoration: none; }
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: #eee;
+    }
+    .badge.new { background: #ffe8de; color: #9a3412; }
+    .badge.contacted { background: #e0f2fe; color: #075985; }
+    .badge.closed { background: #e5e7eb; color: #374151; }
+    .meta { display: grid; grid-template-columns: 160px 1fr; gap: 0.5rem 1rem; margin: 1rem 0; }
+    .meta dt { color: var(--muted); }
+    .actions { display: flex; gap: 0.75rem; align-items: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">{{ app_name }}</div>
+    <div class="actions">
+      {% if admin %}
+        <span class="muted">{{ admin }}</span>
+        <form method="post" action="/admin/logout" style="margin:0">
+          <button type="submit" class="secondary">Log out</button>
+        </form>
+      {% endif %}
+    </div>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
