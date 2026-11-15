@@ -6,6 +6,8 @@ import { cookies } from "next/headers";
 import { adminCookieName } from "@/lib/admin-auth";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 
 async function logoutAction() {
   "use server";
@@ -30,7 +32,7 @@ export default async function AdminListPage({
         )
       : await sql<Inquiry>("select * from inquiries order by created_at desc");
 
-  const admin = expectedAdmin().username;
+  const admin = expectedAdmin()?.username ?? "";
   const active = status || "all";
 
   return (

@@ -8,7 +8,8 @@ class Settings(BaseSettings):
 
     app_name: str = "StorySites"
     debug: bool = False
-    secret_key: str = "dev-secret-change-me"
+    # No default — must be set via environment for admin sessions.
+    secret_key: str = ""
 
     # Cursor hosting injects DATABASE_URL when cursor-app.json declares a database.
     # Local preview falls back to SQLite sample data.
@@ -22,8 +23,9 @@ class Settings(BaseSettings):
         "http://localhost:3847"
     )
 
-    admin_username: str = "admin"
-    admin_password: str = "change-me"
+    # No defaults — admin login fails closed until both are set.
+    admin_username: str = ""
+    admin_password: str = ""
 
     smtp_host: str = ""
     smtp_port: int = 587
@@ -42,6 +44,10 @@ class Settings(BaseSettings):
     @property
     def smtp_configured(self) -> bool:
         return bool(self.smtp_host and self.notify_to)
+
+    @property
+    def admin_configured(self) -> bool:
+        return bool(self.secret_key and self.admin_username and self.admin_password)
 
 
 @lru_cache

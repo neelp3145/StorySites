@@ -3,19 +3,29 @@ import {
   adminCookieValue,
   expectedAdmin,
   isAdminAuthenticated,
+  isAdminConfigured,
 } from "@/lib/admin-auth";
 import { cookies } from "next/headers";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 
 async function loginAction(formData: FormData) {
   "use server";
+  const admin = expectedAdmin();
+  if (!admin) {
+    redirect("/admin/login?error=config");
+  }
+
   const username = String(formData.get("username") || "");
   const password = String(formData.get("password") || "");
-  const expected = expectedAdmin();
-  if (username === expected.username && password === expected.password) {
-    const jar = await cookies();
+  if (username === admin.username && password === admin.password) {
     const cookie = adminCookieValue(username);
+    if (!cookie) {
+      redirect("/admin/login?error=config");
+    }
+    const jar = await cookies();
     jar.set(cookie.name, cookie.value, {
       httpOnly: true,
       sameSite: "lax",
@@ -34,6 +44,8 @@ export default async function AdminLoginPage({
 }) {
   if (await isAdminAuthenticated()) redirect("/admin");
   const params = await searchParams;
+  const configured = isAdminConfigured();
+
   return (
     <div className="admin-shell">
       <header>
@@ -43,11 +55,28 @@ export default async function AdminLoginPage({
         <div className="card" style={{ maxWidth: 420, margin: "2rem auto" }}>
           <h1 style={{ marginTop: 0 }}>Admin login</h1>
           <p className="muted">Sign in to review StorySites inquiries.</p>
-          {params.error ? <p className="error">Invalid username or password.</p> : null}
+          {!configured ? (
+            <p className="error">
+              Admin access is not configured. Set SECRET_KEY, ADMIN_USERNAME, and
+              ADMIN_PASSWORD in app secrets, then republish.
+            </p>
+          ) : null}
+          {params.error === "1" ? (
+            <p className="error">Invalid username or password.</p>
+          ) : null}
+          {params.error === "config" ? (
+            <p className="error">Admin access is not configured.</p>
+          ) : null}
           <form action={loginAction}>
             <div className="field">
               <label htmlFor="username">Username</label>
-              <input id="username" name="username" autoComplete="username" required />
+              <input
+                id="username"
+                name="username"
+                autoComplete="username"
+                required
+                disabled={!configured}
+              />
             </div>
             <div className="field">
               <label htmlFor="password">Password</label>
@@ -57,13 +86,13 @@ export default async function AdminLoginPage({
                 type="password"
                 autoComplete="current-password"
                 required
+                disabled={!configured}
               />
             </div>
-            <button type="submit">Sign in</button>
+            <button type="submit" disabled={!configured}>
+              Sign in
+            </button>
           </form>
-          <p className="muted" style={{ marginTop: "1rem" }}>
-            Local sample defaults: admin / change-me (override with secrets).
-          </p>
         </div>
       </main>
     </div>

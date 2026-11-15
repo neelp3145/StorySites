@@ -4,6 +4,8 @@ import { expectedAdmin, isAdminAuthenticated } from "@/lib/admin-auth";
 import { sql, type Inquiry } from "@/lib/db";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 
 async function updateAction(formData: FormData) {
   "use server";
@@ -41,7 +43,7 @@ export default async function InquiryDetailPage({
     <div className="admin-shell">
       <header>
         <div style={{ fontWeight: 700 }}>StorySites</div>
-        <span className="muted">{expectedAdmin().username}</span>
+        <span className="muted">{expectedAdmin()?.username ?? ""}</span>
       </header>
       <main>
         <p>

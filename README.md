@@ -3,7 +3,7 @@
 Contact/inquiry backend and landing page for StorySites.
 
 - Public form posts to `POST /api/inquiries`
-- Admin UI at `/admin` (default local login: `admin` / `change-me`)
+- Admin UI at `/admin` (requires `SECRET_KEY`, `ADMIN_USERNAME`, and `ADMIN_PASSWORD`)
 - Postgres via Cursor Apps (`cursor-app.json`) or Supabase `DATABASE_URL`
 - Local preview uses in-memory PGlite sample data when `DATABASE_URL` is unset
 

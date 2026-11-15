@@ -19,12 +19,17 @@ templates = Jinja2Templates(directory="app/templates")
 SESSION_COOKIE = "storysites_admin"
 
 
-def _serializer(settings: Settings) -> URLSafeSerializer:
+def _serializer(settings: Settings) -> URLSafeSerializer | None:
+    if not settings.admin_configured:
+        return None
     return URLSafeSerializer(settings.secret_key, salt="admin-session")
 
 
 def _set_session(response: RedirectResponse, settings: Settings, username: str) -> None:
-    token = _serializer(settings).dumps({"u": username})
+    serializer = _serializer(settings)
+    if serializer is None:
+        return
+    token = serializer.dumps({"u": username})
     response.set_cookie(
         SESSION_COOKIE,
         token,
@@ -39,11 +44,14 @@ def _clear_session(response: RedirectResponse) -> None:
 
 
 def _require_admin(request: Request, settings: Settings) -> Optional[str]:
+    serializer = _serializer(settings)
+    if serializer is None:
+        return None
     token = request.cookies.get(SESSION_COOKIE)
     if not token:
         return None
     try:
-        data = _serializer(settings).loads(token)
+        data = serializer.loads(token)
         username = data.get("u")
     except BadSignature:
         return None
@@ -56,10 +64,16 @@ def _require_admin(request: Request, settings: Settings) -> Optional[str]:
 def login_page(request: Request, settings: Settings = Depends(get_settings)):
     if _require_admin(request, settings):
         return RedirectResponse("/admin", status_code=303)
+    error = None
+    if not settings.admin_configured:
+        error = (
+            "Admin access is not configured. Set SECRET_KEY, ADMIN_USERNAME, "
+            "and ADMIN_PASSWORD in the environment."
+        )
     return templates.TemplateResponse(
         request,
         "login.html",
-        {"error": None, "app_name": settings.app_name},
+        {"error": error, "app_name": settings.app_name},
     )
 
 
@@ -70,6 +84,16 @@ def login_submit(
     password: str = Form(...),
     settings: Settings = Depends(get_settings),
 ):
+    if not settings.admin_configured:
+        return templates.TemplateResponse(
+            request,
+            "login.html",
+            {
+                "error": "Admin access is not configured.",
+                "app_name": settings.app_name,
+            },
+            status_code=503,
+        )
     if username == settings.admin_username and password == settings.admin_password:
         response = RedirectResponse("/admin", status_code=303)
         _set_session(response, settings, username)
