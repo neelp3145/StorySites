@@ -6,16 +6,20 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    app_name: str = "StorySites API"
+    app_name: str = "StorySites"
     debug: bool = False
     secret_key: str = "dev-secret-change-me"
 
-    database_url: str = "postgresql+psycopg://postgres:postgres@localhost:5432/postgres"
+    # Cursor hosting injects DATABASE_URL when cursor-app.json declares a database.
+    # Local preview falls back to SQLite sample data.
+    database_url: str = "sqlite+pysqlite:///./storysites.db"
 
     cors_origins: str = (
         "https://storysite-entry.netlify.app,"
         "http://localhost:5500,"
-        "http://127.0.0.1:5500"
+        "http://127.0.0.1:5500,"
+        "http://127.0.0.1:3847,"
+        "http://localhost:3847"
     )
 
     admin_username: str = "admin"
