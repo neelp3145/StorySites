@@ -1,15 +1,7 @@
+import { redirect } from "next/navigation";
+
 export default function Home() {
-  return (
-    <iframe
-      title="StorySites"
-      src="/landing.html"
-      style={{
-        position: "fixed",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        border: "none",
-      }}
-    />
-  );
+  // Cursor Apps hosting sends X-Frame-Options: DENY / CSP frame-ancestors 'none',
+  // so an iframe of /landing.html is blocked in the browser. Serve it as the document.
+  redirect("/landing.html");
 }
