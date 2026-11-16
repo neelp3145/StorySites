@@ -1,4 +1,4 @@
--- Run in Supabase SQL Editor (project: byyeypetaepfkomadvbm)
+-- Run in Supabase SQL Editor (project: mvlmryudxtoqimaktayh)
 
 create table if not exists public.inquiries (
   id bigint generated always as identity primary key,

@@ -4,7 +4,7 @@ Static site for https://storysite-entry.netlify.app with the contact form postin
 
 ## One-time Supabase setup
 
-1. Open your project: https://byyeypetaepfkomadvbm.supabase.co  
+1. Open your project: https://mvlmryudxtoqimaktayh.supabase.co  
 2. SQL Editor → run [`../supabase/migrations/001_create_inquiries.sql`](../supabase/migrations/001_create_inquiries.sql)  
 3. Project Settings → API → copy **Project URL** and **anon public** key  
 
@@ -14,7 +14,7 @@ In Site settings → Environment variables:
 
 | Name | Value |
 | --- | --- |
-| `SUPABASE_URL` | `https://byyeypetaepfkomadvbm.supabase.co` |
+| `SUPABASE_URL` | `https://mvlmryudxtoqimaktayh.supabase.co` |
 | `SUPABASE_ANON_KEY` | your anon public key |
 
 ## Deploy
