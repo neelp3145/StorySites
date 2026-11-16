@@ -1,0 +1,20 @@
+[build]
+  publish = "site"
+  functions = "netlify/functions"
+  command = "npm install"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/inquiries"
+  to = "/.netlify/functions/inquiries"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "https://storysite-entry.netlify.app"
+    Access-Control-Allow-Methods = "POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type"

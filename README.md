@@ -20,6 +20,13 @@ Open http://127.0.0.1:3847 — landing form, `/admin`, `/health`.
 
 The original FastAPI + Alembic implementation lives in [`backend/`](backend/) for Supabase self-hosting.
 
-## Deploy on Cursor
+## Netlify frontend ↔ Supabase backend
 
-Publish from the repository root. The platform attaches Postgres when `cursor-app.json` declares a database and runs `npm run build` (includes migrations).
+The marketing site for https://storysite-entry.netlify.app lives in [`site/`](site/). The contact form posts to `/api/inquiries`, which is a Netlify Function that writes to Supabase (`inquiries` table).
+
+See [`site/README.md`](site/README.md) for Supabase SQL, env vars, and deploy steps.
+
+## Deploy on Cursor (optional admin UI)
+
+Publish from the repository root for the Cursor-hosted admin/preview app. That host may require Cursor sign-in, so the public Netlify form should use the Netlify Function + Supabase path above — not the Cursor Apps URL.
+
