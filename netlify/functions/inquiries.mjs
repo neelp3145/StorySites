@@ -4,6 +4,8 @@ const ALLOWED_ORIGINS = new Set([
   "https://storysite-entry.netlify.app",
   "http://localhost:8888",
   "http://127.0.0.1:8888",
+  "http://localhost:3999",
+  "http://127.0.0.1:3999",
   "http://localhost:5500",
   "http://127.0.0.1:5500",
 ]);

@@ -25,10 +25,21 @@ Supabase Postgres  (inquiries table)
 
 | Path | Role |
 | --- | --- |
-| [`site/`](site/) | Static frontend (Netlify publish directory) |
+| [`site/`](site/) | Production frontend (Netlify publish directory) |
+| [`test-site/`](test-site/) | Mock replica of the live site for API + Supabase testing |
 | [`netlify/functions/`](netlify/functions/) | Serverless inquiry API |
 | [`supabase/migrations/`](supabase/migrations/) | `inquiries` schema + public insert RLS policy |
 | [`netlify.toml`](netlify.toml) | Publish/functions config and `/api/inquiries` redirect |
+
+## Local testing (mock frontend → Supabase)
+
+```bash
+cp .env.netlify.example .env   # set SUPABASE_URL + SUPABASE_ANON_KEY
+npm install
+npm run test:dev
+```
+
+Open http://127.0.0.1:8888 — labeled **TEST REPLICA**. Use **Fill test data**, submit `#contact`, then confirm the row in Supabase. Details: [`test-site/README.md`](test-site/README.md).
 
 ## Production setup
 
