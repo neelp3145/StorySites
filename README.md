@@ -25,11 +25,12 @@ Supabase Postgres  (inquiries table)
 
 | Path | Role |
 | --- | --- |
-| [`site/`](site/) | Production frontend (Netlify publish directory) |
+| [`site/`](site/) | Production marketing frontend (Netlify publish directory) |
 | [`test-site/`](test-site/) | Mock replica of the live site for API + Supabase testing |
-| [`netlify/functions/`](netlify/functions/) | Serverless inquiry API |
-| [`supabase/migrations/`](supabase/migrations/) | `inquiries` schema + public insert RLS policy |
-| [`netlify.toml`](netlify.toml) | Publish/functions config and `/api/inquiries` redirect |
+| [`portal/`](portal/) | Management dashboard — **Inquiries** tab reads live Supabase rows |
+| [`netlify/functions/`](netlify/functions/) | Public inquiry API + admin inquiries API |
+| [`supabase/migrations/`](supabase/migrations/) | `inquiries` schema + RLS / status migrations |
+| [`netlify.toml`](netlify.toml) | Publish/functions config and API redirects |
 
 ## Local testing (mock frontend → Supabase)
 
@@ -40,6 +41,15 @@ npm run test:dev
 ```
 
 Open http://127.0.0.1:8888 — labeled **TEST REPLICA**. Use **Fill test data**, submit `#contact`, then confirm the row in Supabase. Details: [`test-site/README.md`](test-site/README.md).
+
+## Management portal (live Inquiries)
+
+```bash
+# Also run supabase/migrations/002_expand_inquiry_status.sql once in Supabase
+npm run portal:dev
+```
+
+Open http://127.0.0.1:8890 → **Inquiries** to see Supabase submissions. Deploy notes: [`portal/README.md`](portal/README.md).
 
 ## Production setup
 

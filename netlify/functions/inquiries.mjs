@@ -50,14 +50,15 @@ export async function handler(event) {
   }
 
   const supabaseUrl = (process.env.SUPABASE_URL || "").trim();
+  // Prefer service role so insert+.select() is not blocked by RLS.
   const supabaseKey = (
-    process.env.SUPABASE_ANON_KEY ||
     process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_ANON_KEY ||
     ""
   ).trim();
 
   if (!supabaseUrl || !supabaseKey) {
-    console.error("Missing SUPABASE_URL or SUPABASE_ANON_KEY");
+    console.error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
     return {
       statusCode: 503,
       headers,

@@ -5,7 +5,8 @@
   "description": "StorySites Netlify site + inquiry API (Supabase)",
   "scripts": {
     "build": "npm install",
-    "test:dev": "netlify dev --dir=test-site --port=8888"
+    "test:dev": "netlify dev --dir=test-site --port=8888",
+    "portal:dev": "netlify dev --dir=portal --port=8890"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0"
