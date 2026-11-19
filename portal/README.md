@@ -2,6 +2,10 @@
 
 Private-staff UI for https://storysites-mgmt-portal.netlify.app.
 
+Public contact form submissions on storysite-entry create an **Inquiry** and also
+upsert a **Customer**, then create linked **Project**, draft **Invoice**, and
+**Hosting** records so every portal tab stays in sync.
+
 All operational tabs load from Supabase via the storysite-entry admin API:
 
 | Tab | API |

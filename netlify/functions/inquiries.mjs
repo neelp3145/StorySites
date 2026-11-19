@@ -1,7 +1,9 @@
-import { createClient } from "@supabase/supabase-js";
+import { getSupabaseAdmin } from "../lib/supabase.mjs";
+import { syncIntakeFromInquiry } from "../lib/intake.mjs";
 
 const ALLOWED_ORIGINS = new Set([
   "https://storysite-entry.netlify.app",
+  "https://storysites-mgmt-portal.netlify.app",
   "http://localhost:8888",
   "http://127.0.0.1:8888",
   "http://localhost:3999",
@@ -49,27 +51,17 @@ export async function handler(event) {
     };
   }
 
-  const supabaseUrl = (process.env.SUPABASE_URL || "").trim();
-  // Prefer service role so insert+.select() is not blocked by RLS.
-  const supabaseKey = (
-    process.env.SUPABASE_SERVICE_ROLE_KEY ||
-    process.env.SUPABASE_ANON_KEY ||
-    ""
-  ).trim();
-
-  if (!supabaseUrl || !supabaseKey) {
-    const missing = [
-      !supabaseUrl ? "SUPABASE_URL" : null,
-      !supabaseKey ? "SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_ANON_KEY)" : null,
-    ].filter(Boolean);
-    console.error("Missing env:", missing.join(", "));
+  let supabase;
+  try {
+    supabase = getSupabaseAdmin();
+  } catch (error) {
+    console.error(error.message);
     return {
       statusCode: 503,
       headers,
       body: JSON.stringify({
         ok: false,
         message: "Inquiry service is not configured yet.",
-        missing,
       }),
     };
   }
@@ -151,12 +143,13 @@ export async function handler(event) {
   };
 
   try {
-    const supabase = createClient(supabaseUrl, supabaseKey, {
-      auth: { persistSession: false, autoRefreshToken: false },
-    });
-    const { data, error } = await supabase.from("inquiries").insert(row).select("id").single();
+    const { data: inquiry, error } = await supabase
+      .from("inquiries")
+      .insert(row)
+      .select("id")
+      .single();
     if (error) {
-      console.error("Supabase insert failed", error);
+      console.error("Supabase inquiry insert failed", error);
       return {
         statusCode: 500,
         headers,
@@ -167,6 +160,17 @@ export async function handler(event) {
       };
     }
 
+    let related = null;
+    try {
+      related = await syncIntakeFromInquiry(supabase, {
+        inquiryId: inquiry.id,
+        row,
+      });
+    } catch (syncError) {
+      // Inquiry is saved; related records are best-effort so the form still succeeds.
+      console.error("Intake sync failed after inquiry save", syncError);
+    }
+
     return {
       statusCode: 201,
       headers,
@@ -174,7 +178,8 @@ export async function handler(event) {
         ok: true,
         message:
           "Your request has been submitted. Thank you — we will review it and follow up.",
-        id: data?.id ?? null,
+        id: inquiry?.id ?? null,
+        related,
       }),
     };
   } catch (error) {
