@@ -141,6 +141,178 @@ export function customerFromPortalBody(body = {}) {
   return row;
 }
 
+function mapStatus(toPortal, toDb, fallbackPortal, fallbackDb) {
+  return {
+    toPortal(value) {
+      if (!value) return fallbackPortal;
+      const raw = String(value).trim();
+      if (toPortal[raw.toLowerCase()]) return toPortal[raw.toLowerCase()];
+      if (toDb[raw]) return raw;
+      return raw;
+    },
+    toDb(value) {
+      if (!value) return fallbackDb;
+      const raw = String(value).trim();
+      if (toDb[raw]) return toDb[raw];
+      const lower = raw.toLowerCase().replace(/\s+/g, "_");
+      if (toPortal[lower]) return lower;
+      return lower;
+    },
+  };
+}
+
+const projectStatus = mapStatus(
+  {
+    not_started: "Not Started",
+    in_development: "In Development",
+    customer_review: "Customer Review",
+    completed: "Completed",
+    on_hold: "On Hold",
+  },
+  {
+    "Not Started": "not_started",
+    "In Development": "in_development",
+    "Customer Review": "customer_review",
+    Completed: "completed",
+    "On Hold": "on_hold",
+  },
+  "Not Started",
+  "not_started"
+);
+
+const invoiceStatus = mapStatus(
+  {
+    draft: "Draft",
+    sent: "Sent",
+    unpaid: "Unpaid",
+    paid: "Paid",
+    overdue: "Overdue",
+    cancelled: "Cancelled",
+  },
+  {
+    Draft: "draft",
+    Sent: "sent",
+    Unpaid: "unpaid",
+    Paid: "paid",
+    Overdue: "overdue",
+    Cancelled: "cancelled",
+  },
+  "Draft",
+  "draft"
+);
+
+const hostingStatus = mapStatus(
+  {
+    active: "Active",
+    renewal_due: "Renewal Due",
+    expired: "Expired",
+    cancelled: "Cancelled",
+  },
+  {
+    Active: "active",
+    "Renewal Due": "renewal_due",
+    Expired: "expired",
+    Cancelled: "cancelled",
+  },
+  "Active",
+  "active"
+);
+
+export function projectToPortal(row) {
+  return {
+    id: String(row.id),
+    name: row.customer_name,
+    service: row.service_type,
+    status: projectStatus.toPortal(row.status),
+    due: row.due_date || "",
+    notes: row.notes || "",
+    customer_id: row.customer_id != null ? String(row.customer_id) : null,
+  };
+}
+
+export function projectFromPortalBody(body = {}) {
+  const customer_name = String(body.name || body.customer_name || "").trim();
+  const service_type = String(body.service || body.service_type || "").trim();
+  if (!customer_name || !service_type) {
+    const err = new Error("name and service are required.");
+    err.statusCode = 422;
+    throw err;
+  }
+  return {
+    customer_name,
+    service_type,
+    status: projectStatus.toDb(body.status),
+    due_date: body.due || body.due_date || null,
+    notes: body.notes != null ? String(body.notes) : null,
+    updated_at: new Date().toISOString(),
+  };
+}
+
+export function invoiceToPortal(row) {
+  return {
+    id: String(row.id),
+    name: row.customer_name,
+    amount: Number(row.amount) || 0,
+    status: invoiceStatus.toPortal(row.status),
+    due: row.due_date || "",
+    notes: row.notes || "",
+    customer_id: row.customer_id != null ? String(row.customer_id) : null,
+  };
+}
+
+export function invoiceFromPortalBody(body = {}) {
+  const customer_name = String(body.name || body.customer_name || "").trim();
+  if (!customer_name) {
+    const err = new Error("name is required.");
+    err.statusCode = 422;
+    throw err;
+  }
+  return {
+    customer_name,
+    amount: Number(body.amount) || 0,
+    status: invoiceStatus.toDb(body.status),
+    due_date: body.due || body.due_date || null,
+    notes: body.notes != null ? String(body.notes) : null,
+    updated_at: new Date().toISOString(),
+  };
+}
+
+export function hostingToPortal(row) {
+  return {
+    id: String(row.id),
+    name: row.customer_name,
+    site: row.site_url,
+    renewal: row.renewal_date || "",
+    status: hostingStatus.toPortal(row.status),
+    notes: row.notes || "",
+    customer_id: row.customer_id != null ? String(row.customer_id) : null,
+  };
+}
+
+export function hostingFromPortalBody(body = {}) {
+  const customer_name = String(body.name || body.customer_name || "").trim();
+  const site_url = String(body.site || body.site_url || "").trim();
+  if (!customer_name || !site_url) {
+    const err = new Error("name and site are required.");
+    err.statusCode = 422;
+    throw err;
+  }
+  return {
+    customer_name,
+    site_url,
+    renewal_date: body.renewal || body.renewal_date || null,
+    status: hostingStatus.toDb(body.status),
+    notes: body.notes != null ? String(body.notes) : null,
+    updated_at: new Date().toISOString(),
+  };
+}
+
+export const resourceStatus = {
+  projects: projectStatus,
+  invoices: invoiceStatus,
+  hosting: hostingStatus,
+};
+
 export function json(statusCode, body, origin = "") {
   const allowed = new Set([
     "https://storysites-mgmt-portal.netlify.app",

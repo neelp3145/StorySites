@@ -2,44 +2,40 @@
 
 Private-staff UI for https://storysites-mgmt-portal.netlify.app.
 
-The **Inquiries** and **Customers** tabs load live rows from Supabase via the
-storysite-entry admin API:
+All operational tabs load from Supabase via the storysite-entry admin API:
 
-- `GET /api/admin/inquiries`
-- `GET /api/admin/customers` (+ POST / PATCH / DELETE)
+| Tab | API |
+| --- | --- |
+| Inquiries | `/api/admin/inquiries` |
+| Customers | `/api/admin/customers` |
+| Projects | `/api/admin/projects` |
+| Invoices | `/api/admin/invoices` |
+| Hosting & Renewals | `/api/admin/hosting` |
 
-Projects, invoices, and hosting still use local demo data until connected.
+## One-time Supabase setup
 
-One-time: run `supabase/migrations/003_create_customers.sql` in the Supabase SQL Editor.
+Run these in order in the Supabase SQL Editor if you have not already:
+
+1. `supabase/migrations/001_create_inquiries.sql`
+2. `supabase/migrations/002_expand_inquiry_status.sql`
+3. `supabase/migrations/003_create_customers.sql`
+4. `supabase/migrations/004_create_projects_invoices_hosting.sql`
 
 ## Local run
-
-From the repo root (with `.env` containing `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY`):
 
 ```bash
 npm run portal:dev
 ```
 
-Open http://127.0.0.1:8890 → **Inquiries**.
+Open http://127.0.0.1:8890
 
-## Deploy to storysites-mgmt-portal (Option A)
-
-On that Netlify site, link `neelp3145/StorySites` (`main`) with:
+## Deploy to storysites-mgmt-portal
 
 | Setting | Value |
 | --- | --- |
 | Branch | `main` |
 | **Base directory** | `portal` |
 | Publish directory | `.` |
-| Build command | *(optional; `portal/netlify.toml` sets a no-op)* |
-| Functions directory | *(leave empty)* |
+| Functions | empty |
 
-**Important:** Base directory must be `portal`. If it is empty, the root
-`netlify.toml` forces `publish = "site"` and you will see the marketing homepage.
-
-No Supabase env vars are needed on the **mgmt** site when it calls the entry API.
-Keep `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` on **storysite-entry** only.
-
-After deploy, open https://storysites-mgmt-portal.netlify.app → **Inquiries**.
-
-Add auth before treating this as production — the admin API currently has no login gate.
+Also redeploy **storysite-entry** so the new admin functions are live (env vars stay on that site).

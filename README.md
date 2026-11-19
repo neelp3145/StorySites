@@ -45,8 +45,8 @@ Open http://127.0.0.1:8888 — labeled **TEST REPLICA**. Use **Fill test data**,
 ## Management portal (live Inquiries)
 
 Contact form submissions on storysite-entry land in Supabase. The management
-portal reads inquiries and customers through `/api/admin/inquiries` and
-`/api/admin/customers` on the entry site.
+portal reads and writes inquiries, customers, projects, invoices, and hosting
+through `/api/admin/*` on the entry site.
 
 ```bash
 # Also run supabase/migrations/002_expand_inquiry_status.sql once in Supabase

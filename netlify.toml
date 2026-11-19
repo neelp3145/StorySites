@@ -48,3 +48,39 @@
   to = "/.netlify/functions/admin-customers?id=:id"
   status = 200
   force = true
+
+[[redirects]]
+  from = "/api/admin/projects"
+  to = "/.netlify/functions/admin-projects"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/projects/:id"
+  to = "/.netlify/functions/admin-projects?id=:id"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/invoices"
+  to = "/.netlify/functions/admin-invoices"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/invoices/:id"
+  to = "/.netlify/functions/admin-invoices?id=:id"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/hosting"
+  to = "/.netlify/functions/admin-hosting"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/admin/hosting/:id"
+  to = "/.netlify/functions/admin-hosting?id=:id"
+  status = 200
+  force = true
