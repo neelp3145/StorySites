@@ -10,12 +10,15 @@ Static site for https://storysite-entry.netlify.app with the contact form postin
 
 ## Netlify env vars
 
-In Site settings → Environment variables:
+In Site settings → Environment variables (then **redeploy**):
 
 | Name | Value |
 | --- | --- |
 | `SUPABASE_URL` | `https://mvlmryudxtoqimaktayh.supabase.co` |
-| `SUPABASE_ANON_KEY` | your anon public key |
+| `SUPABASE_SERVICE_ROLE_KEY` | your service_role / secret API key |
+| `SUPABASE_ANON_KEY` | optional fallback (anon/publishable key) |
+
+Without these, `POST /api/inquiries` returns **503** (“Inquiry service is not configured yet.”).
 
 ## Deploy
 

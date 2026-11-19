@@ -58,13 +58,18 @@ export async function handler(event) {
   ).trim();
 
   if (!supabaseUrl || !supabaseKey) {
-    console.error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
+    const missing = [
+      !supabaseUrl ? "SUPABASE_URL" : null,
+      !supabaseKey ? "SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_ANON_KEY)" : null,
+    ].filter(Boolean);
+    console.error("Missing env:", missing.join(", "));
     return {
       statusCode: 503,
       headers,
       body: JSON.stringify({
         ok: false,
         message: "Inquiry service is not configured yet.",
+        missing,
       }),
     };
   }
