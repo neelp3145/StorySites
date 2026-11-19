@@ -3,6 +3,13 @@
   functions = "netlify/functions"
   command = "npm install"
 
+# Secrets scanning: SUPABASE_URL is a public project URL (safe to omit).
+# Function bundles may embed server-only env at build time; they are not
+# client-facing static assets, so omit .netlify output from the scan.
+[build.environment]
+  SECRETS_SCAN_OMIT_KEYS = "SUPABASE_URL"
+  SECRETS_SCAN_OMIT_PATHS = ".netlify/**"
+
 # Local marketing/test form: npm run test:dev
 # Local management portal: npm run portal:dev
 [dev]

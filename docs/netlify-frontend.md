@@ -22,7 +22,7 @@ Without these, `POST /api/inquiries` returns **503** (“Inquiry service is not 
 
 ## Deploy
 
-From the repo root (this folder is the publish directory):
+From the repo root (`site/` is the publish directory — do not put secrets or env docs inside `site/`):
 
 ```bash
 # Link this GitHub repo to the existing storysite-entry Netlify site, with:

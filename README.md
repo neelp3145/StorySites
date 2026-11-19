@@ -63,4 +63,4 @@ Open http://127.0.0.1:8890 → **Inquiries** to see Supabase submissions. Deploy
    - **Functions directory:** `netlify/functions`
 4. Deploy, submit a test request at `/#contact`, and confirm a row in Supabase → Table Editor → `inquiries`.
 
-More detail: [`site/README.md`](site/README.md).
+More detail: [`docs/netlify-frontend.md`](docs/netlify-frontend.md).
