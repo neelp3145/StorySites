@@ -43,3 +43,11 @@ Open http://127.0.0.1:8890
 | Functions | empty |
 
 Also redeploy **storysite-entry** so the new admin functions are live (env vars stay on that site).
+
+## Stripe payments
+
+1. Run `supabase/migrations/005_invoice_stripe_fields.sql` in Supabase.
+2. On **storysite-entry**, set `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET`.
+3. Stripe webhook endpoint: `https://storysite-entry.netlify.app/api/stripe-webhook`  
+   Event: `checkout.session.completed`
+4. In **Invoices**, click **Collect payment** to open hosted Checkout. Successful payments mark the invoice **Paid**.

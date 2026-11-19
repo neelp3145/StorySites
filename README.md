@@ -60,6 +60,17 @@ Deploy to https://storysites-mgmt-portal.netlify.app with **Base directory =
 `portal`** (so the root config does not publish the marketing `site/`).
 Details: [`portal/README.md`](portal/README.md).
 
+## Stripe Checkout
+
+Invoices can be paid through [Stripe Checkout](https://docs.stripe.com/payments/checkout).
+
+1. Run `supabase/migrations/005_invoice_stripe_fields.sql`
+2. On **storysite-entry** Netlify env, set `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET`
+3. In Stripe Dashboard → Developers → Webhooks, add endpoint:
+   `https://storysite-entry.netlify.app/api/stripe-webhook`
+   for event `checkout.session.completed`
+4. In the management portal **Invoices** tab, click **Collect payment**
+
 ## Production setup
 
 1. In Supabase SQL Editor, run [`supabase/migrations/001_create_inquiries.sql`](supabase/migrations/001_create_inquiries.sql).
