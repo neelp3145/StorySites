@@ -1,9 +1,12 @@
 // Management portal API base.
-// Empty = same origin (recommended: deploy this portal on a Netlify site
-// that uses this repo with publish = portal and the shared functions).
-// For local test against another Netlify site, set e.g.:
-//   window.STORYSITES_API_BASE = "https://your-api-site.netlify.app";
-window.STORYSITES_API_BASE =
-  typeof window.STORYSITES_API_BASE === "string"
-    ? window.STORYSITES_API_BASE
-    : "";
+// Local (npm run portal:dev): same origin → Netlify Dev functions.
+// Production (storysites-mgmt-portal): call the StorySites entry site,
+// which already has /api/admin/inquiries → Supabase.
+(function () {
+  if (typeof window.STORYSITES_API_BASE === "string") return;
+  const host = window.location.hostname;
+  const local = host === "localhost" || host === "127.0.0.1";
+  window.STORYSITES_API_BASE = local
+    ? ""
+    : "https://storysite-entry.netlify.app";
+})();

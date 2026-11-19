@@ -44,12 +44,18 @@ Open http://127.0.0.1:8888 — labeled **TEST REPLICA**. Use **Fill test data**,
 
 ## Management portal (live Inquiries)
 
+Contact form submissions on storysite-entry land in Supabase. The management
+portal reads the same rows through `GET /api/admin/inquiries` on the entry site.
+
 ```bash
 # Also run supabase/migrations/002_expand_inquiry_status.sql once in Supabase
 npm run portal:dev
 ```
 
-Open http://127.0.0.1:8890 → **Inquiries** to see Supabase submissions. Deploy notes: [`portal/README.md`](portal/README.md).
+Open http://127.0.0.1:8890 → **Inquiries**.
+
+Deploy `portal/` to https://storysites-mgmt-portal.netlify.app (publish
+directory `portal`). Details: [`portal/README.md`](portal/README.md).
 
 ## Production setup
 

@@ -85,7 +85,7 @@ export function json(statusCode, body, origin = "") {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": allow,
-      "Access-Control-Allow-Methods": "GET, PATCH, OPTIONS",
+      "Access-Control-Allow-Methods": "GET, PATCH, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     },
     body: JSON.stringify(body),
