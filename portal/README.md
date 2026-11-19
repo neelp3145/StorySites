@@ -2,13 +2,15 @@
 
 Private-staff UI for https://storysites-mgmt-portal.netlify.app.
 
-The **Inquiries** tab loads live rows from the same Supabase database that
-https://storysite-entry.netlify.app/#contact writes to, via:
+The **Inquiries** and **Customers** tabs load live rows from Supabase via the
+storysite-entry admin API:
 
-`GET https://storysite-entry.netlify.app/api/admin/inquiries`
+- `GET /api/admin/inquiries`
+- `GET /api/admin/customers` (+ POST / PATCH / DELETE)
 
-Status changes and deletes use that same admin API. Other tabs still use local
-demo data until those resources are connected.
+Projects, invoices, and hosting still use local demo data until connected.
+
+One-time: run `supabase/migrations/003_create_customers.sql` in the Supabase SQL Editor.
 
 ## Local run
 

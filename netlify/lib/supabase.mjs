@@ -70,6 +70,77 @@ export function inquiryToPortal(row) {
   };
 }
 
+const CUSTOMER_STATUS_TO_PORTAL = {
+  prospect: "Prospect",
+  active: "Active",
+  completed: "Completed",
+  archived: "Archived",
+};
+
+const CUSTOMER_STATUS_TO_DB = {
+  Prospect: "prospect",
+  Active: "active",
+  Completed: "completed",
+  Archived: "archived",
+};
+
+export function toPortalCustomerStatus(value) {
+  if (!value) return "Prospect";
+  const raw = String(value).trim();
+  if (CUSTOMER_STATUS_TO_PORTAL[raw.toLowerCase()]) {
+    return CUSTOMER_STATUS_TO_PORTAL[raw.toLowerCase()];
+  }
+  if (CUSTOMER_STATUS_TO_DB[raw]) return raw;
+  return raw;
+}
+
+export function toDbCustomerStatus(value) {
+  if (!value) return "prospect";
+  const raw = String(value).trim();
+  if (CUSTOMER_STATUS_TO_DB[raw]) return CUSTOMER_STATUS_TO_DB[raw];
+  const lower = raw.toLowerCase();
+  if (CUSTOMER_STATUS_TO_PORTAL[lower]) return lower;
+  return lower;
+}
+
+export function customerToPortal(row) {
+  return {
+    id: String(row.id),
+    name: row.full_name,
+    email: row.email,
+    phone: row.phone || "",
+    service: row.service_type,
+    status: toPortalCustomerStatus(row.status),
+    notes: row.notes || "",
+    inquiry_id: row.inquiry_id != null ? String(row.inquiry_id) : null,
+    date: (row.created_at || "").toString().slice(0, 10),
+  };
+}
+
+export function customerFromPortalBody(body = {}) {
+  const full_name = String(body.name || body.full_name || "").trim();
+  const email = String(body.email || "").trim();
+  const service_type = String(body.service || body.service_type || "").trim();
+  if (!full_name || !email || !service_type) {
+    const err = new Error("name, email, and service are required.");
+    err.statusCode = 422;
+    throw err;
+  }
+  const row = {
+    full_name,
+    email,
+    phone: body.phone ? String(body.phone).trim() : null,
+    service_type,
+    status: toDbCustomerStatus(body.status),
+    notes: body.notes != null ? String(body.notes) : null,
+    updated_at: new Date().toISOString(),
+  };
+  if (body.inquiry_id != null && body.inquiry_id !== "") {
+    row.inquiry_id = Number(body.inquiry_id);
+  }
+  return row;
+}
+
 export function json(statusCode, body, origin = "") {
   const allowed = new Set([
     "https://storysites-mgmt-portal.netlify.app",
@@ -85,7 +156,7 @@ export function json(statusCode, body, origin = "") {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": allow,
-      "Access-Control-Allow-Methods": "GET, PATCH, DELETE, OPTIONS",
+      "Access-Control-Allow-Methods": "GET, POST, PATCH, DELETE, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type",
     },
     body: JSON.stringify(body),
