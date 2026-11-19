@@ -20,22 +20,24 @@ npm run portal:dev
 
 Open http://127.0.0.1:8890 → **Inquiries**.
 
-Submit a form via `npm run test:dev` or the live entry site so there is data.
-
-## Deploy to storysites-mgmt-portal
+## Deploy to storysites-mgmt-portal (Option A)
 
 On that Netlify site, link `neelp3145/StorySites` (`main`) with:
 
 | Setting | Value |
 | --- | --- |
-| Publish directory | `portal` |
-| Build command | *(leave empty)* or `echo 'portal static'` |
-| Functions directory | *(not required)* — API lives on storysite-entry |
+| Branch | `main` |
+| **Base directory** | `portal` |
+| Publish directory | `.` |
+| Build command | *(optional; `portal/netlify.toml` sets a no-op)* |
+| Functions directory | *(leave empty)* |
+
+**Important:** Base directory must be `portal`. If it is empty, the root
+`netlify.toml` forces `publish = "site"` and you will see the marketing homepage.
 
 No Supabase env vars are needed on the **mgmt** site when it calls the entry API.
 Keep `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` on **storysite-entry** only.
 
 After deploy, open https://storysites-mgmt-portal.netlify.app → **Inquiries**.
-New contact-form submissions should appear there (refresh if the tab was already open).
 
 Add auth before treating this as production — the admin API currently has no login gate.

@@ -1,0 +1,5 @@
+# Used when the storysites-mgmt-portal Netlify site sets
+# Base directory = portal (so the root netlify.toml does not force publish = site).
+[build]
+  publish = "."
+  command = "echo 'StorySites management portal'"
