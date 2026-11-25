@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>StorySites™ | Simple Customer Journey</title><style>
 :root{--ink:#172029;--muted:#697480;--line:#e6e9e9;--orange:#eb6746;--paper:#f6f6f4;--green:#176f53;--nav:#151b20;--blue:#214f80}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 Inter,Arial,Helvetica,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}a{color:var(--blue)}.app{display:grid;grid-template-columns:225px minmax(0,1fr);min-height:100vh}.side{background:var(--nav);color:white;padding:27px 16px;display:flex;flex-direction:column;gap:18px}.brand{font-size:24px;letter-spacing:-1.2px;font-weight:900;padding:4px 8px 20px;border-bottom:1px solid #363d42}.brand span{color:var(--orange)}.brand small{font-size:9px;display:block;color:#b0b8bd;letter-spacing:2px;font-weight:600;margin-top:3px}.nav{display:grid;gap:7px}.nav button{text-align:left;border:0;color:#b4bfc7;background:transparent;padding:12px 13px;border-radius:10px;font-size:13px;font-weight:700}.nav button.active,.nav button:hover{color:white;background:#343a40}.nav em{float:right;font-style:normal;background:#ea6748;color:white;border-radius:10px;font-size:10px;padding:1px 7px}.sidefoot{margin-top:auto;color:#939da5;font-size:11px;padding:12px 8px;border-top:1px solid #363d42}.main{min-width:0}.top{background:white;padding:18px 30px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:12px}.top b{font-size:12px;letter-spacing:1.3px}.top small{color:var(--muted)}.body{padding:27px 30px;max-width:1400px;margin:auto}h1{font-size:34px;letter-spacing:-1.3px;line-height:1.1;margin:3px 0 9px}h2{font-size:19px;letter-spacing:-.4px;margin:0 0 12px}h3{font-size:15px;margin:0 0 9px}p{margin:6px 0 14px}.muted{color:var(--muted)}.tiny{font-size:11px}.kicker{color:var(--orange);font-size:10px;font-weight:850;letter-spacing:1.8px;text-transform:uppercase}.header{display:flex;align-items:end;justify-content:space-between;gap:14px;margin-bottom:20px}.header p{color:var(--muted);font-size:13px}.button,button.button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:9px;border:1px solid #dcdede;background:white;padding:10px 13px;font-size:12px;font-weight:800;color:var(--ink);text-decoration:none}.button:hover{border-color:var(--orange)}.button.primary{background:var(--ink);border-color:var(--ink);color:white}.button.orange{background:var(--orange);border-color:var(--orange);color:white}.button.light{background:#fff5f0;border-color:#f6d7ca;color:#a7442d}.button:disabled{opacity:.45;cursor:not-allowed}.row{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:15px}.card.strong{border:2px solid #f2c9bc}.banner{padding:12px 16px;background:#fff7ef;border:1px solid #f6d6c0;border-radius:11px;color:#77533c;font-size:12px;margin:0 0 19px}.good{color:var(--green)}.pill{display:inline-block;border-radius:20px;background:#eef0f0;color:#47545c;padding:5px 10px;font-size:11px;font-weight:750}.pill.ready{background:#e5f5eb;color:#116c48}.pill.pending{background:#fff0df;color:#a15b2d}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.stat{background:white;border:1px solid var(--line);border-radius:15px;padding:19px}.stat strong{display:block;font-size:30px;letter-spacing:-1px;margin:5px 0}.stat small{color:var(--muted)}.listrow{padding:14px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px}.listrow:last-child{border:0}.listrow strong{font-size:13px}.listrow p{font-size:12px;color:var(--muted);margin:3px 0 0}.search{width:100%;max-width:370px;border:1px solid var(--line);background:white;border-radius:9px;padding:11px 12px}.field{display:block;margin-bottom:14px}.field>b{display:block;font-size:12px;margin-bottom:6px}.field input,.field textarea,.field select{width:100%;border:1px solid #dce1e2;border-radius:9px;padding:10px 11px;outline-color:var(--orange);background:white}.field textarea{resize:vertical;min-height:82px}.field small{display:block;color:var(--muted);margin-top:5px}.field input[type=checkbox]{width:auto;margin-right:7px}.stepbar{display:flex;gap:5px;overflow:auto;margin-bottom:16px}.stepbar span{flex:1;min-width:90px;background:#eceded;color:#74808a;border-radius:8px;padding:9px 7px;text-align:center;font-size:10px;font-weight:750}.stepbar span.done{background:#e3f1eb;color:#197452}.stepbar span.current{background:#ffede6;color:#b85634}.layout2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(270px,.85fr);gap:16px}.next{background:#1d2830;border-radius:16px;color:white;padding:22px}.next h2{color:white;margin-bottom:8px}.next p{color:#c8d2d8;font-size:12px}.next .button{margin-top:7px}.next .button.primary{background:var(--orange);border-color:var(--orange)}.subhead{padding-top:4px;margin-bottom:12px;border-bottom:1px solid var(--line);padding-bottom:12px}.compacttable{width:100%;border-collapse:collapse}.compacttable th{text-align:left;text-transform:uppercase;letter-spacing:1px;color:#7c8790;font-size:10px;padding:10px 7px;background:#fafafa}.compacttable td{padding:12px 7px;border-bottom:1px solid #eceeee;font-size:12px;vertical-align:middle}.compacttable td:last-child{text-align:right}.empty{padding:28px;text-align:center;color:var(--muted);background:#fafbfb;border-radius:10px}.split{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.label{font-size:11px;color:#6c767d;font-weight:750;text-transform:uppercase;letter-spacing:.6px}.kv{display:grid;grid-template-columns:145px 1fr;gap:9px;border-bottom:1px solid var(--line);padding:9px 0;font-size:12px}.kv:last-child{border:0}.hr{height:1px;background:var(--line);margin:15px 0}.filebox{border:1px dashed #cfd5d5;border-radius:10px;padding:14px;background:#fcfdfd}.modalbg{position:fixed;inset:0;background:#121b22ad;z-index:10;display:grid;place-items:center;padding:15px}.modal{background:white;border-radius:16px;padding:24px;width:min(680px,100%);max-height:92vh;overflow:auto;box-shadow:0 18px 65px #0004}.modal.big{width:min(890px,100%)}.modalhead{display:flex;align-items:start;justify-content:space-between;gap:12px;margin-bottom:13px}.modalhead h2{margin:0}.notice{font-size:12px;border-left:3px solid var(--orange);padding:9px 12px;background:#faf7f4;margin-bottom:12px}.offerpaper{font-family:Arial, sans-serif;color:#182330;background:#fff;padding:24px;border:1px solid #e2e6e7;border-radius:9px;max-height:65vh;overflow:auto}.offerpaper h1{font-size:29px}.offerpaper h2{font-size:18px;margin-top:22px}.offerpaper pre{white-space:pre-wrap;word-wrap:break-word;font:12px/1.55 Arial}.footer{text-align:left;color:#879197;font-size:11px;margin-top:24px}.hamb{display:none}@media(max-width:900px){.app{grid-template-columns:1fr}.side{padding:12px;gap:6px}.brand{border:0;padding:2px 8px;font-size:18px}.brand small{display:none}.nav{display:flex;gap:4px;overflow:auto}.nav button{white-space:nowrap;padding:9px}.sidefoot{display:none}.top{padding:13px 16px}.body{padding:18px 15px}.layout2{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}}@media(max-width:570px){.grid,.grid3{grid-template-columns:1fr}.header{align-items:start;flex-direction:column}.card{padding:16px}.top small{display:none}.kv{grid-template-columns:1fr;gap:1px}.compacttable th:nth-child(2),.compacttable td:nth-child(2){display:none}}
-</style><style id="storysites-dashboard-metrics">.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:13px;margin-bottom:16px}.metrics-grid .stat{min-width:0}.metrics-grid .stat strong{line-height:1.1}.metrics-grid .stat>small{display:block;font-size:16px;font-weight:800;line-height:1.35;color:#24313d;letter-spacing:-.15px}@media(max-width:570px){.metrics-grid{grid-template-columns:1fr 1fr}}@media(max-width:390px){.metrics-grid{grid-template-columns:1fr}}</style><style id="storysites-legal-layout">.legal-terms{font:13px/1.65 Arial,Helvetica,sans-serif;color:#334052;max-width:100%;overflow-wrap:anywhere}.legal-kicker{font-weight:700;font-size:12px;letter-spacing:.065em;color:#243548;margin:0 0 9px}.legal-heading{font-weight:800;font-size:13px;line-height:1.4;margin:20px 0 6px;color:#172029}.legal-paragraph{font-size:13px;line-height:1.65;margin:0 0 12px}.offerpaper .legal-terms{border-top:1px solid #e5e8e9;padding-top:16px;margin-top:14px}.offerpaper .legal-heading{font-size:13px;margin-top:17px}.offerpaper .legal-paragraph{font-size:12.5px;line-height:1.65}@media print{.legal-terms{break-inside:auto}.legal-heading{break-after:avoid}.legal-paragraph{orphans:3;widows:3}}</style></head><body><div class="app"><aside class="side"><div class="brand">STORY<span>SITES</span>™<small>FOOVISION LLC · MANAGEMENT</small></div><nav class="nav" id="nav"></nav><div class="sidefoot">STORYSITES MANAGEMENT<br>Loading database…</div></aside><main class="main"><div class="top"><b>STORYSITES / CUSTOMER OPERATIONS</b><div class="row"><small>Business workflow prototype</small><button class="button" data-cmd="backup">↓ Back up demo</button></div></div><div class="body"><div class="banner"><b>Connecting…</b> Loading inquiries and customers from Supabase.</div><div id="app"></div><div class="footer">STORYSITES™ · One record, one next step · No duplicate status maintenance</div></div></main></div><div id="modalroot"></div><script src="/api-config.js"></script>
+</style><style id="storysites-dashboard-metrics">.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:13px;margin-bottom:16px}.metrics-grid .stat{min-width:0}.metrics-grid .stat strong{line-height:1.1}.metrics-grid .stat>small{display:block;font-size:16px;font-weight:800;line-height:1.35;color:#24313d;letter-spacing:-.15px}@media(max-width:570px){.metrics-grid{grid-template-columns:1fr 1fr}}@media(max-width:390px){.metrics-grid{grid-template-columns:1fr}}</style><style id="storysites-legal-layout">.legal-terms{font:13px/1.65 Arial,Helvetica,sans-serif;color:#334052;max-width:100%;overflow-wrap:anywhere}.legal-kicker{font-weight:700;font-size:12px;letter-spacing:.065em;color:#243548;margin:0 0 9px}.legal-heading{font-weight:800;font-size:13px;line-height:1.4;margin:20px 0 6px;color:#172029}.legal-paragraph{font-size:13px;line-height:1.65;margin:0 0 12px}.offerpaper .legal-terms{border-top:1px solid #e5e8e9;padding-top:16px;margin-top:14px}.offerpaper .legal-heading{font-size:13px;margin-top:17px}.offerpaper .legal-paragraph{font-size:12.5px;line-height:1.65}@media print{.legal-terms{break-inside:auto}.legal-heading{break-after:avoid}.legal-paragraph{orphans:3;widows:3}}</style></head><body><div class="app"><aside class="side"><div class="brand">STORY<span>SITES</span>™<small>FOOVISION LLC · MANAGEMENT</small></div><nav class="nav" id="nav"></nav><div class="sidefoot">SIMPLIFIED JOURNEY · LOCAL DEMO<br>Not secure production storage</div></aside><main class="main"><div class="top"><b>STORYSITES / CUSTOMER OPERATIONS</b><div class="row"><small>Business workflow prototype</small><button class="button" data-cmd="backup">↓ Back up demo</button></div></div><div class="body"><div class="banner"><b>Prototype only:</b> Records and uploaded files are held in this browser, not in a secure shared database. Use fictional information only. Live website integration, verified electronic consent, billing and cloud backups require production development.</div><div id="app"></div><div class="footer">STORYSITES™ · One record, one next step · No duplicate status maintenance</div></div></main></div><div id="modalroot"></div><script src="/api-config.js"></script>
 <script>
 'use strict';
 const KEY='storysites_simple_journey_v1', LEGACY='storysites_portal_demo_v1', DB='storysites_simple_attachments';
@@ -21,7 +21,7 @@ const project=(p)=>p?.projects?.[0];
 function step(p){let q=project(p);if(!p.contactedAt)return 0;if(!q)return 1;if(!q.offer)return 2;if(!q.offer.sentAt)return 3;if(!q.accepted)return 4;if(!q.payment||!q.payment.verified)return 5;if(!q.startedAt)return 6;if(!q.reviewAt)return 7;if(!q.finalApproval)return 8;if(!q.delivery)return 9;return 10}
 const steps=['New inquiry','Discovery','Prepare offer','Send offer','Await acceptance','Await payment','Ready to build','Building / review','Final approval','Launch / handoff','Closed'];
 const phase=p=>steps[step(p)];
-function render(){const __nav=document.getElementById('nav'),__app=document.getElementById('app');if(!__nav||!__app)return;__nav.innerHTML=[['home','◫ Overview'],['inbox','✉ New inquiries'],['customers','♧ Customers'],['files','▤ File library'],['settings','⚙ Settings']].map(([v,t])=>`<button class="${view===v?'active':''}" data-view="${v}">${t}${v==='inbox'&&state.people.filter(p=>!p.contactedAt).length?` <em>${state.people.filter(p=>!p.contactedAt).length}</em>`:''}</button>`).join('');__app.innerHTML=liveBanner()+(view==='home'?home():view==='inbox'?inbox():view==='customers'?customers():view==='detail'?detail():view==='files'?library():settings());updateChrome()}
+function render(){document.getElementById('nav').innerHTML=[['home','◫ Overview'],['inbox','✉ New inquiries'],['customers','♧ Customers'],['files','▤ File library'],['settings','⚙ Settings']].map(([v,t])=>`<button class="${view===v?'active':''}" data-view="${v}">${t}${v==='inbox'&&state.people.filter(p=>!p.contactedAt).length?` <em>${state.people.filter(p=>!p.contactedAt).length}</em>`:''}</button>`).join('');document.getElementById('app').innerHTML=view==='home'?home():view==='inbox'?inbox():view==='customers'?customers():view==='detail'?detail():view==='files'?library():settings()}
 function intro(label,title,desc,right=''){return `<div class="header"><div><div class="kicker">${label}</div><h1>${title}</h1><p>${desc}</p></div><div class="row">${right}</div></div>`}
 function home(){
   const fresh=state.people.filter(p=>!p.contactedAt).length;
@@ -76,7 +76,7 @@ function projectSummary(q){let o=q.offer;return `<div class="kv"><span class="la
 function fileRows(p,q,max=100){let f=(p.files||[]).filter(x=>x.current!==false);let qf=(q?.files||[]).filter(x=>x.current!==false);let all=[...f.map(x=>({...x,area:'Customer'})),...qf.map(x=>({...x,area:'Project'}))].slice(0,max);return all.length?all.map(x=>`<div class="listrow"><div><strong>${esc(x.name)}</strong><p>${esc(x.category)} · ${x.area} · ${short(x.added)} · v${x.version||1}</p></div><div class="row"><button class="button" data-cmd="file-view:${esc(x.id)}">View</button><button class="button" data-cmd="file-download:${esc(x.id)}">↓</button></div></div>`).join(''):'<p class="muted tiny">No files yet. Upload résumés, photos, logos, or evidence when they are available.</p>'}
 function library(){let all=[];for(const p of state.people){for(const f of p.files||[])all.push({...f,customer:p.name,cid:p.id,kind:'Customer'});for(const q of p.projects||[])for(const f of q.files||[])all.push({...f,customer:p.name,cid:p.id,kind:q.id})}all=all.filter(f=>[f.name,f.customer,f.category,f.kind].join(' ').toLowerCase().includes(fileFilter.toLowerCase())).sort((a,b)=>String(b.added).localeCompare(String(a.added)));return intro('Search & retrieval','Customer File Library','Find files across customers and projects. Originals and older versions stay linked.',`<button class="button" data-view="customers">Browse customers</button>`)+`<div class="card"><input class="search" id="file-search" placeholder="Search by customer, filename, category…" value="${esc(fileFilter)}"><div id="filerows">${fileGlobalRows(all)}</div></div><div class="notice">This prototype uses browser-local file storage. Production requires secure private storage, permissions, backups and a customer/project file index.</div>`}
 function fileGlobalRows(all){return all.length?all.map(f=>`<div class="listrow"><div><strong>${esc(f.name)} ${f.current===false?'<span class="pill">Older version</span>':''}</strong><p>${esc(f.customer)} · ${esc(f.kind)} · ${esc(f.category)} · v${esc(f.version||1)}</p></div><div class="row"><button class="button" data-cmd="file-view:${esc(f.id)}">View</button><button class="button" data-cmd="file-download:${esc(f.id)}">Download</button><button class="button" data-open="${esc(f.cid)}">Customer</button></div></div>`).join(''):'<div class="empty">No matching files. Upload from a customer workspace.</div>'}
-function settings(){let t=state.terms.at(-1);return intro('Company-wide setup','System Settings','Maintain standard terms in one place — not on every customer record.')+('<div class="card"><h2>Supabase connection</h2><p class="muted">This portal loads customers, projects, invoices, and hosting from <b>storysite-entry</b> (/api/admin/*). Set <code>STORYSITES_PORTAL_URL</code> on the entry site to this portal URL.</p><div class="row"><button class="button orange" data-cmd="live-reload">Reload from Supabase</button></div><p class="muted tiny" style="margin-top:10px">'+(liveReady?'Last load succeeded.':(liveError?esc(liveError):'Not connected yet.'))+'</p></div>')+`<div class="card"><h2>Master StorySites Service Terms</h2><p class="muted">Current version: <b>${esc(t.version)}</b>. New proposals snapshot these terms automatically; earlier accepted versions never change.</p><div class="row"><button class="button" data-cmd="terms-view">View current terms</button><button class="button" data-cmd="terms-new">Create new version</button></div></div><div class="card"><h2>Before going live</h2><p class="muted">These are production requirements for Neel and Dev — not completed functions in this local HTML.</p>${['Protected sign-in and role-based permissions','Database and private file storage with backups','Public website inquiry integration and validation','Customer-facing authenticated offer approval and acceptance audit trail','Verified payment provider webhooks and email delivery','Access-controlled document URLs and retention policy','Production testing, including exports and disaster recovery'].map(x=>`<div class="listrow"><span>${x}</span><span class="pill pending">Not connected</span></div>`).join('')}</div><div class="card"><h2>Preserving existing prototype data</h2><p class="muted">On first opening, this redesign attempts to import customer and offer metadata from earlier StorySites browser storage. Existing legacy attachments remain in the previous prototype and must be exported separately. This redesign saves under a new browser storage key so it does not overwrite the prior version.</p><div class="row"><button class="button" data-cmd="backup">Download data backup</button><button class="button" data-cmd="restore">Import this redesign's data backup</button></div><input class="hidden" id="restore-file" type="file" accept="application/json" style="display:none"></div>`}
+function settings(){let t=state.terms.at(-1);return intro('Company-wide setup','System Settings','Maintain standard terms in one place — not on every customer record.')+`<div class="card"><h2>Master StorySites Service Terms</h2><p class="muted">Current version: <b>${esc(t.version)}</b>. New proposals snapshot these terms automatically; earlier accepted versions never change.</p><div class="row"><button class="button" data-cmd="terms-view">View current terms</button><button class="button" data-cmd="terms-new">Create new version</button></div></div><div class="card"><h2>Before going live</h2><p class="muted">These are production requirements for Neel and Dev — not completed functions in this local HTML.</p>${['Protected sign-in and role-based permissions','Database and private file storage with backups','Public website inquiry integration and validation','Customer-facing authenticated offer approval and acceptance audit trail','Verified payment provider webhooks and email delivery','Access-controlled document URLs and retention policy','Production testing, including exports and disaster recovery'].map(x=>`<div class="listrow"><span>${x}</span><span class="pill pending">Not connected</span></div>`).join('')}</div><div class="card"><h2>Preserving existing prototype data</h2><p class="muted">On first opening, this redesign attempts to import customer and offer metadata from earlier StorySites browser storage. Existing legacy attachments remain in the previous prototype and must be exported separately. This redesign saves under a new browser storage key so it does not overwrite the prior version.</p><div class="row"><button class="button" data-cmd="backup">Download data backup</button><button class="button" data-cmd="restore">Import this redesign's data backup</button></div><input class="hidden" id="restore-file" type="file" accept="application/json" style="display:none"></div>`}
 function modal(title,body,wide=false){document.getElementById('modalroot').innerHTML=`<div class="modalbg"><div class="modal ${wide?'big':''}"><div class="modalhead"><div><div class="kicker">STORYSITES™ / CUSTOMER OPERATIONS</div><h2>${title}</h2></div><button class="button" data-cmd="close">✕ Close</button></div>${body}</div></div>`}
 function openNewInquiry(){modal('Add New Inquiry',`<p class="muted tiny">Capture only the inquiry basics. The person remains New until you confirm actual outreach.</p><form id="inquiry-form"><div class="grid"><label class="field"><b>Name *</b><input name="name" required></label><label class="field"><b>Email *</b><input name="email" type="email" required></label></div><label class="field"><b>Service interest</b><select name="service"><option>Personal StorySite</option><option>Business StorySite</option><option>Executive StorySite</option><option>Creative StorySite</option><option>Other / custom</option></select></label><label class="field"><b>Original inquiry</b><textarea name="request" placeholder="What did the person ask for?"></textarea></label><button class="button orange" type="submit">Save New Inquiry</button></form>`) }
 function reviewInquiry(cid){let p=state.people.find(x=>x.id===cid);if(!p)return;modal('New Inquiry — '+esc(p.name),`<div class="kv"><span class="label">Email</span><span>${esc(p.email)}</span></div><div class="kv"><span class="label">Interest</span><span>${esc(p.service)}</span></div><div class="kv"><span class="label">Received</span><span>${short(p.received)}</span></div><p>${esc(p.request)}</p><div class="notice">Viewing does not change New status.</div><div class="row"><button class="button" data-cmd="intro-email:${esc(p.id)}">Draft introductory email</button><button class="button orange" data-cmd="contact:${esc(p.id)}">Mark Contacted (after outreach)</button></div>`)}
@@ -195,7 +195,7 @@ function checkApprovalMail(raw,p,q,sender){
  return {name,raw:body,actualSender:email};
 }
 function agreement(){let p=person(),q=project(p),o=q.offer;modal('Record Customer Acceptance',`<div class="row" style="margin-bottom:15px"><button class="button orange" data-cmd="import-approval">Import customer approval email instead →</button></div><div class="notice">The initial website inquiry checkbox is not an acceptance of this personalized offer. Only record approval after you actually receive the customer's affirmative response.</div><p>Offer <b>v${esc(o.version)}</b> · Total <b>${money(o.total)}</b> · Terms <b>${esc(o.termsVersion)}</b></p><form id="accept-form"><label class="field"><b>Approval method</b><select name="method"><option>Customer email reply</option><option>Recorded online acceptance (production only)</option><option>Other documented written acceptance</option></select></label><label class="field"><b>Acceptance evidence / reference *</b><textarea required name="evidence" placeholder="Paste the exact approval wording or identify the saved customer email and upload it to the library."></textarea></label><label class="field"><input name="confirm" type="checkbox" required>I confirm the customer explicitly approved this proposal, exact price and the stated StorySites Service Terms.</label><button class="button orange">Record Acceptance</button></form>`)}
-function paymentForm(){let q=project(person());const stripeBtn=(q.payment&&q.payment.invoiceId&&!/^paid$/i.test(q.payment.status||''))?('<div class="row" style="margin-bottom:12px"><button type="button" class="button orange" data-cmd="stripe-pay:'+esc(q.payment.invoiceId)+'">Collect payment via Stripe Checkout</button></div>'):'';modal('Record Verified Payment',`<div class="notice">Do not mark Paid based on a checkout screenshot alone. Verify the full amount with your actual payment provider. This prototype cannot independently verify a transaction.</div>${stripeBtn}<p>Approved total: <b>${money(q.offer?.total??q.payment?.amount??0)}</b></p><form id="payment-form"><div class="grid"><label class="field"><b>Amount received ($) *</b><input name="amount" type="number" step="0.01" min="0" value="${q.offer.total}" required></label><label class="field"><b>Transaction reference *</b><input name="reference" required></label></div><label class="field"><b>Payment provider / method</b><input name="provider" placeholder="Stripe, Bluevine, etc."></label><label class="field"><input type="checkbox" name="confirmed" required>I verified this payment outside the prototype with the payment provider.</label><button class="button orange">Save Verified Payment</button></form>`)}
+function paymentForm(){let q=project(person());modal('Record Verified Payment',`<div class="notice">Do not mark Paid based on a checkout screenshot alone. Verify the full amount with your actual payment provider. This prototype cannot independently verify a transaction.</div><p>Approved total: <b>${money(q.offer.total)}</b></p><form id="payment-form"><div class="grid"><label class="field"><b>Amount received ($) *</b><input name="amount" type="number" step="0.01" min="0" value="${q.offer.total}" required></label><label class="field"><b>Transaction reference *</b><input name="reference" required></label></div><label class="field"><b>Payment provider / method</b><input name="provider" placeholder="Stripe, Bluevine, etc."></label><label class="field"><input type="checkbox" name="confirmed" required>I verified this payment outside the prototype with the payment provider.</label><button class="button orange">Save Verified Payment</button></form>`)}
 function finalForm(){modal('Final Customer Approval',`<p class="muted">Record the customer’s authorization to publish the current final version.</p><form id="final-form"><label class="field"><b>Evidence / customer confirmation *</b><textarea name="evidence" required placeholder="Date and wording from approval email or linked file…"></textarea></label><label class="field"><input type="checkbox" required>I received the customer's final approval to publish.</label><button class="button orange">Record Final Approval</button></form>`)}
 function deliveryForm(){modal('Deliver StorySite & Close',`<form id="delivery-form"><label class="field"><b>Live URL (if hosted)</b><input name="url" placeholder="https://…"></label><label class="field"><b>HTML delivery / handoff reference (if self-hosted)</b><input name="note" placeholder="File name, delivery email, or handoff notes"></label><p class="muted tiny">Enter a live URL or a delivery/handoff reference before closing.</p><button class="button orange">Record Delivery & Close</button></form>`)}
 function fileModal(){let p=person();if(!p?.contactedAt){alert('File uploads are available after you confirm first contact.');return}let q=project(p);modal('Upload Customer File',`<p class="muted tiny">Keep the original and optionally mark an older version replaced. Files are saved only in local browser IndexedDB.</p><form id="file-form"><label class="field"><b>File *</b><input type="file" name="file" required></label><div class="grid"><label class="field"><b>Category</b><select name="category"><option>Résumé / CV</option><option>Photograph</option><option>Logo / branding</option><option>LinkedIn / supporting document</option><option>Proposal / agreement evidence</option><option>Payment evidence</option><option>Other</option></select></label><label class="field"><b>Link to</b><select name="area"><option value="customer">Customer (all projects)</option>${q?'<option value="project">Current project</option>':''}</select></label></div><label class="field"><b>Replace an existing file (optional)</b><select name="replace"><option value="">Keep as a new file</option>${[...(p.files||[]),...(q?.files||[])].filter(f=>f.current!==false).map(f=>`<option value="${esc(f.id)}">${esc(f.name)} (v${f.version||1})</option>`).join('')}</select></label><button class="button orange">Save File</button></form>`) }
@@ -231,11 +231,11 @@ function openGmailDraft(to,subject,body){
 function emailIntro(cid){let p=state.people.find(x=>x.id===cid),sub=`StorySites™ — Let's talk about your idea`,b=`Hello ${p.name},\n\nThank you for your interest in StorySites. I'd love to learn more about what you have in mind and discuss what your personalized site might include.\n\nWould you be available for a brief phone call? Please share a couple of days and times that work for you.\n\nThank you,\nRichard\nFOOVISION LLC · StorySites™`;openGmailDraft(p.email,sub,b)}
 function offerEmail(){let p=person(),q=project(p),o=q.offer;let b=`Hello ${p.name},\n\nThank you for discussing your StorySite with me. Attached is your personalized StorySites offer (proposal v${o.version}) including the service terms (${o.termsVersion}).\n\nPlease review the scope, deliverables, total price (${money(o.total)}) and terms. To approve, open the attached HTML offer in a browser and click the “Approve Proposal & Cost” button. It prepares an approval email for you to review and SEND. Alternatively, reply explicitly approving proposal v${o.version}, the scope of work, total price and terms. Once approval is received, I'll send the payment information.\n\nThank you,\nRichard\nFOOVISION LLC · StorySites™\n\nNOTE: Attach the downloaded offer before sending.`;openGmailDraft(p.email,'StorySites™ Personalized Offer — '+q.id+' v'+o.version,b)}
 function backup(){dl(new Blob([JSON.stringify({format:'StorySites-Simple-v1',exported:now(),records:state},null,2)],{type:'application/json'}),'StorySites_Simple_Demo_Backup.json')}
-function run(cmd){let [a,ref]=cmd.split(':');let p=person(),q=project(p);if(a==='close')return closeModal();if(a==='new-inquiry')return openNewInquiry();if(a==='review'&&ref)return reviewInquiry(ref);if(a==='contact')return contact(ref);if(a==='intro-email')return emailIntro(ref);if(a==='discovery')return discover();if(a==='edit-customer')return editCustomer();if(a==='offer')return offerForm();if(a==='preview')return preview();if(a==='send-branded-offer')return sendBrandedOffer();if(a==='offer-email')return offerEmail();if(a==='offer-download')return downloadCustomerOffer();if(a==='offer-sent'){if(!confirm('Did you actually send proposal v'+q.offer.version+' to '+p.name+'? This button does not send the email.'))return;q.offer.materialsFileSnapshot=currentOfferMaterials(p,q);q.offer.sentAt=now();log(p,'Personalized offer marked sent','Offer v'+q.offer.version);closeModal();return render()}if(a==='accept')return agreement();if(a==='import-approval')return importApproval();if(a==='payment')return paymentForm();if(a==='start'){if(!q?.accepted||!q.payment?.verified||Number(q.payment.amount)<Number(q.offer.total))return alert('Verified approval and full payment are required before starting.');if(!confirm('Start work on this paid and approved project?'))return;q.startedAt=now();log(p,'Development started');return render()}if(a==='review'){if(!q?.startedAt)return alert('Start Build first.');q.reviewAt=now();log(p,'Preview sent for customer review');return render()}if(a==='final')return finalForm();if(a==='delivery')return deliveryForm();if(a==='file-upload')return fileModal();if(a==='file-view')return serveFile(ref,true);if(a==='file-download')return serveFile(ref,false);if(a==='terms-view')return modal('Current StorySites Service Terms',`${formattedTerms(state.terms.at(-1).body)}`,true);if(a==='terms-new')return termsForm();if(a==='project-export'){if(!q)return alert('No project yet');return htmlDownload(reportHtml(p,q),`StorySites_${q.id}_Project_Record.html`)}if(a==='backup')return backup();if(a==='restore')return document.getElementById('restore-file')?.click();if(a==='modification'){if(!q?.delivery)return alert('Only completed projects can start a separate modification');let n={id:id('P'),kind:'Modification',service:q.service,offer:null,offerHistory:[],accepted:null,payment:null,startedAt:null,reviewAt:null,finalApproval:null,delivery:null,notes:'Modification to '+q.id,events:[],files:[]};p.projects.unshift(n);log(p,'New modification request','Linked to '+q.id);return render()}if(a==='live-reload')return loadLiveData();if(a==='stripe-pay'&&ref)return collectStripePayment(ref)}
+function run(cmd){let [a,ref]=cmd.split(':');let p=person(),q=project(p);if(a==='close')return closeModal();if(a==='new-inquiry')return openNewInquiry();if(a==='review'&&ref)return reviewInquiry(ref);if(a==='contact')return contact(ref);if(a==='intro-email')return emailIntro(ref);if(a==='discovery')return discover();if(a==='edit-customer')return editCustomer();if(a==='offer')return offerForm();if(a==='preview')return preview();if(a==='send-branded-offer')return sendBrandedOffer();if(a==='offer-email')return offerEmail();if(a==='offer-download')return downloadCustomerOffer();if(a==='offer-sent'){if(!confirm('Did you actually send proposal v'+q.offer.version+' to '+p.name+'? This button does not send the email.'))return;q.offer.materialsFileSnapshot=currentOfferMaterials(p,q);q.offer.sentAt=now();log(p,'Personalized offer marked sent','Offer v'+q.offer.version);closeModal();return render()}if(a==='accept')return agreement();if(a==='import-approval')return importApproval();if(a==='payment')return paymentForm();if(a==='start'){if(!q?.accepted||!q.payment?.verified||Number(q.payment.amount)<Number(q.offer.total))return alert('Verified approval and full payment are required before starting.');if(!confirm('Start work on this paid and approved project?'))return;q.startedAt=now();log(p,'Development started');return render()}if(a==='review'){if(!q?.startedAt)return alert('Start Build first.');q.reviewAt=now();log(p,'Preview sent for customer review');return render()}if(a==='final')return finalForm();if(a==='delivery')return deliveryForm();if(a==='file-upload')return fileModal();if(a==='file-view')return serveFile(ref,true);if(a==='file-download')return serveFile(ref,false);if(a==='terms-view')return modal('Current StorySites Service Terms',`${formattedTerms(state.terms.at(-1).body)}`,true);if(a==='terms-new')return termsForm();if(a==='project-export'){if(!q)return alert('No project yet');return htmlDownload(reportHtml(p,q),`StorySites_${q.id}_Project_Record.html`)}if(a==='backup')return backup();if(a==='restore')return document.getElementById('restore-file')?.click();if(a==='modification'){if(!q?.delivery)return alert('Only completed projects can start a separate modification');let n={id:id('P'),kind:'Modification',service:q.service,offer:null,offerHistory:[],accepted:null,payment:null,startedAt:null,reviewAt:null,finalApproval:null,delivery:null,notes:'Modification to '+q.id,events:[],files:[]};p.projects.unshift(n);log(p,'New modification request','Linked to '+q.id);return render()}}
 document.addEventListener('click',e=>{let v=e.target.closest('[data-view]');if(v){view=v.dataset.view;selected=null;filter='';render();window.scrollTo(0,0);return}let o=e.target.closest('[data-open]');if(o){selected=o.dataset.open;view='detail';filter='';render();window.scrollTo(0,0);return}let c=e.target.closest('[data-cmd]');if(c)run(c.dataset.cmd)});
 document.addEventListener('input',e=>{if(e.target.id==='search'){filter=e.target.value;let arr=state.people.filter(p=>(view==='inbox'?!p.contactedAt:!!p.contactedAt)&&(p.name+' '+p.email+' '+p.service+' '+p.request).toLowerCase().includes(filter.toLowerCase()));let el=document.getElementById(view==='inbox'?'inboxrows':'customerrows');if(el)el.innerHTML=view==='inbox'?inboxRows(arr):arr.map(p=>`<div class="listrow"><div><strong>${esc(p.name)}</strong><p>${esc(p.email)}</p></div><div class="row"><span class="pill">${esc(phase(p))}</span><button class="button" data-open="${esc(p.id)}">Open customer</button></div></div>`).join('')}if(e.target.id==='file-search'){fileFilter=e.target.value;let all=[];for(const p of state.people){for(const f of p.files||[])all.push({...f,customer:p.name,cid:p.id,kind:'Customer'});for(const q of p.projects||[])for(const f of q.files||[])all.push({...f,customer:p.name,cid:p.id,kind:q.id})}document.getElementById('filerows').innerHTML=fileGlobalRows(all.filter(f=>(f.name+' '+f.customer+' '+f.category+' '+f.kind).toLowerCase().includes(fileFilter.toLowerCase())))}});
 document.addEventListener('change',async e=>{if(e.target?.id!=='approval-email-file')return;const f=e.target.files?.[0];if(!f)return;if(f.size>1024*1024)return alert('Email file too large. Use a file under 1 MB.');try{let val=await f.text();let area=document.querySelector('#approval-import-form [name=approvalText]');if(area)area.value=val}catch(err){alert('Could not read this email file: '+err.message)}});
-document.addEventListener('submit',async e=>{let form=e.target;if(!form.id)return;e.preventDefault();let v=Object.fromEntries(new FormData(form).entries()),p=person(),q=project(p);switch(form.id){case 'inquiry-form':{let newp={id:id('C'),name:v.name.trim(),email:v.email.trim(),service:v.service,request:v.request||'',received:now(),contactedAt:null,contactMethod:'',notes:'',discovery:{},files:[],projects:[],events:[],source:'local'};if(liveReady){try{const created=await api('/api/admin/inquiries',{method:'POST',body:JSON.stringify({name:newp.name,email:newp.email,service:newp.service,notes:newp.request,request_type:'General inquiry'})});const inq=created.inquiry||created;if(inq&&inq.id){newp.sourceInquiryId=String(inq.id);newp.source='supabase';newp.id=String(inq.id)}}catch(err){alert('Saved in this browser; Supabase create failed: '+(err.message||err))}}state.people.unshift(newp);log(newp,'Inquiry received','Manual entry');view='inbox';break}case 'contact-form':{let x=state.people.find(z=>z.id===v.cid);if(!x||x.contactedAt)return;x.contactedAt=now();x.contactMethod=v.method;x.notes=[x.notes,v.note].filter(Boolean).join('\n');log(x,'First outreach confirmed',v.method);if(liveReady){try{if(x.customerId||(/^\d+$/.test(String(x.id))&&x.source==='supabase')){const cid=x.customerId||x.id;await api('/api/admin/customers/'+encodeURIComponent(cid),{method:'PATCH',body:JSON.stringify({status:'Active',notes:x.notes||''})});x.customerId=String(cid);x.customerStatus='Active'}if(x.sourceInquiryId){await api('/api/admin/inquiries/'+encodeURIComponent(x.sourceInquiryId),{method:'PATCH',body:JSON.stringify({status:'Contacted'})})}}catch(err){alert('Contact saved here; Supabase update failed: '+(err.message||err))}}selected=x.id;view='detail';break}case 'customer-form':Object.assign(p,{name:v.name,email:v.email,service:v.service,notes:v.notes});log(p,'Customer details updated');break;case 'discovery-form':if(!p?.contactedAt)return alert('Confirm actual first contact before saving discovery.');p.discovery=v;p.discoveryReviewedAt=now();log(p,'Discovery updated');break;case 'offer-form':{if(!p?.contactedAt||(!p.discoveryReviewedAt&&!Object.values(p.discovery||{}).some(Boolean)))return alert('Contact and discovery must be completed before preparing the offer.');if(q?.accepted)return alert('Accepted offer is locked');if(!q){q={id:id('P'),kind:v.kind,service:v.service,offer:null,offerHistory:[],accepted:null,payment:null,startedAt:null,reviewAt:null,finalApproval:null,delivery:null,notes:'',events:[],files:[]};p.projects.unshift(q)}if(q.offer?.sentAt&&!confirm('This will create a revised offer and clear its Sent milestone. Continue?'))return;let t=state.terms.at(-1),nextVersion=Number(q.offer?.version||0)+1,price=Number(v.price),hosting=v.hosting==='managed'?99:0;let offer={version:nextVersion,scope:v.scope,exclusions:v.exclusions,materials:v.materials,price,hosting:v.hosting,revisions:Number(v.revisions)||0,timing:v.timing,total:Number((price+hosting).toFixed(2)),savedAt:now(),sentAt:null,termsVersion:t.version,termsText:t.body};q.kind=v.kind;q.service=v.service;q.offer=offer;q.offerHistory.push({...offer});log(p,'Offer draft saved',q.id+' v'+nextVersion);break}case 'approval-import-form':{
+document.addEventListener('submit',async e=>{let form=e.target;if(!form.id)return;e.preventDefault();let v=Object.fromEntries(new FormData(form).entries()),p=person(),q=project(p);switch(form.id){case 'inquiry-form':{let newp={id:id('C'),name:v.name.trim(),email:v.email.trim(),service:v.service,request:v.request||'',received:now(),contactedAt:null,contactMethod:'',notes:'',discovery:{},files:[],projects:[],events:[],source:'local'};try{if(window.StorySitesDB){const row=await StorySitesDB.createInquiry(newp);if(row){newp.sourceInquiryId=String(row.id);newp.id=String(row.id);newp.source='supabase'}}}catch(err){console.warn('Supabase inquiry create failed',err)}state.people.unshift(newp);log(newp,'Inquiry received','Manual entry');view='inbox';break}case 'contact-form':{let x=state.people.find(z=>z.id===v.cid);if(!x||x.contactedAt)return;x.contactedAt=now();x.contactMethod=v.method;x.notes=[x.notes,v.note].filter(Boolean).join('\n');log(x,'First outreach confirmed',v.method);try{if(window.StorySitesDB)await StorySitesDB.confirmContact(x)}catch(err){console.warn('Supabase contact update failed',err)}selected=x.id;view='detail';break}case 'customer-form':Object.assign(p,{name:v.name,email:v.email,service:v.service,notes:v.notes});log(p,'Customer details updated');break;case 'discovery-form':if(!p?.contactedAt)return alert('Confirm actual first contact before saving discovery.');p.discovery=v;p.discoveryReviewedAt=now();log(p,'Discovery updated');break;case 'offer-form':{if(!p?.contactedAt||(!p.discoveryReviewedAt&&!Object.values(p.discovery||{}).some(Boolean)))return alert('Contact and discovery must be completed before preparing the offer.');if(q?.accepted)return alert('Accepted offer is locked');if(!q){q={id:id('P'),kind:v.kind,service:v.service,offer:null,offerHistory:[],accepted:null,payment:null,startedAt:null,reviewAt:null,finalApproval:null,delivery:null,notes:'',events:[],files:[]};p.projects.unshift(q)}if(q.offer?.sentAt&&!confirm('This will create a revised offer and clear its Sent milestone. Continue?'))return;let t=state.terms.at(-1),nextVersion=Number(q.offer?.version||0)+1,price=Number(v.price),hosting=v.hosting==='managed'?99:0;let offer={version:nextVersion,scope:v.scope,exclusions:v.exclusions,materials:v.materials,price,hosting:v.hosting,revisions:Number(v.revisions)||0,timing:v.timing,total:Number((price+hosting).toFixed(2)),savedAt:now(),sentAt:null,termsVersion:t.version,termsText:t.body};q.kind=v.kind;q.service=v.service;q.offer=offer;q.offerHistory.push({...offer});log(p,'Offer draft saved',q.id+' v'+nextVersion);break}case 'approval-import-form':{
  if(!q?.offer?.sentAt||q.accepted)return alert('This offer is not awaiting acceptance.');
  let info;try{info=checkApprovalMail(v.approvalText,p,q,v.actualSender)}catch(err){return alert('Approval not recorded: '+err.message)}
  if(!confirm('Record CUSTOMER APPROVAL for '+p.name+'?\n\nProject: '+q.id+' v'+q.offer.version+'\nTotal: '+money(q.offer.total)+'\nApprover: '+info.name+'\n\nOnly click OK after inspecting the genuine received email in Gmail.'))return;
@@ -245,262 +245,191 @@ document.addEventListener('submit',async e=>{let form=e.target;if(!form.id)retur
  }case 'accept-form':if(!q?.offer?.sentAt)return alert('Mark offer as Sent before recording acceptance');q.accepted={at:now(),method:v.method,evidence:v.evidence,version:q.offer.version,termsVersion:q.offer.termsVersion,total:q.offer.total};log(p,'Customer acceptance recorded','Offer v'+q.offer.version);break;case 'payment-form':{let amount=Number(v.amount);if(Math.abs(amount-Number(q.offer.total))>.001)return alert('Payment must equal the full approved amount of '+money(q.offer.total));q.payment={at:now(),reference:v.reference,provider:v.provider,amount,verified:true};log(p,'Full payment verified',money(amount)+' · '+v.reference);break}case 'final-form':if(!q?.reviewAt)return alert('Send for Customer Review first');q.finalApproval={at:now(),evidence:v.evidence};log(p,'Final publication approval recorded');break;case 'delivery-form':if(!q?.finalApproval)return alert('Final approval is required first');if(!v.url.trim()&&!v.note.trim())return alert('Enter a live URL or a handoff reference');q.delivery={at:now(),url:v.url.trim(),note:v.note.trim()};log(p,'Project delivered and closed',v.url||v.note);break;case 'terms-form':if(state.terms.some(t=>t.version===v.version))return alert('This terms version already exists');if(!confirm('Publish this as the new master terms for FUTURE offers only?'))return;state.terms.push({id:id('T'),version:v.version,body:normalizeTermsText(v.body),created:now()});log(null,'Standard terms version created',v.version);break;case 'file-form':{if(!p?.contactedAt)return alert('First confirm outreach before uploading customer files.');let f=form.querySelector('[name=file]').files[0];if(!f)return alert('Select a file');if(f.size>15*1024*1024)return alert('For this demo, keep files under 15 MB. Production storage will have a separate policy.');let old=findFile(v.replace)?.f;if(old)old.current=false;let entry={id:id('F'),name:f.name,type:f.type,category:v.category,added:now(),version:old?Number(old.version||1)+1:1,current:true,replaces:v.replace||null,size:f.size};try{await filePut({id:entry.id,blob:f});(v.area==='project'&&q?q.files:p.files).unshift(entry);log(p,'File uploaded',entry.name+' v'+entry.version)}catch(err){if(old)old.current=true;alert('File could not be stored in this browser: '+err.message);return}break}default:return}persist();closeModal();render()});
 document.addEventListener('change',async e=>{if(e.target.id==='restore-file'){let f=e.target.files?.[0];if(!f)return;try{let obj=JSON.parse(await f.text());if(obj.format!=='StorySites-Simple-v1'||!obj.records?.people?.length&&!Array.isArray(obj.records?.people))throw new Error('Not a valid simple-journal backup');if(!confirm('Replace current simplified demo records with this backup? Uploaded file binaries are not included.'))return;state=obj.records;persist();view='home';selected=null;render()}catch(err){alert('Unable to import: '+err.message)}}});
 
-/* —— Live Supabase bridge (storysite-entry /api/admin/*) —— */
-const apiBase=(typeof window.STORYSITES_API_BASE==='string'?window.STORYSITES_API_BASE:'').replace(/\/$/,'');
-let liveReady=false, liveError='', liveLoading=false;
-async function api(path, opts={}){
-  const res=await fetch(apiBase+path,{...opts,headers:{'Accept':'application/json','Content-Type':'application/json',...(opts.headers||{})}});
-  const body=await res.json().catch(()=>({}));
-  if(!res.ok) throw new Error(body.message||('HTTP '+res.status));
-  return body;
-}
-function updateChrome(){
-  const banner=document.querySelector('.body > .banner');
-  const foot=document.querySelector('.sidefoot');
-  const topSmall=document.querySelector('.top small');
-  if(liveReady){
-    if(banner) banner.innerHTML='<b>Live database:</b> Inquiries and customers load from Supabase via storysite-entry. Confirming outreach writes back to the database. Offer drafts and file uploads still save in this browser.';
-    if(foot) foot.innerHTML='CONNECTED · SUPABASE<br>Add staff auth before production';
-    if(topSmall) topSmall.textContent='Live Supabase · storysite-entry';
-  }else if(liveError){
-    if(banner) banner.innerHTML='<b>Database connection error:</b> '+esc(liveError)+' Showing any locally saved journey data. <button class="button" data-cmd="live-reload" style="margin-left:8px">Retry</button>';
-    if(foot) foot.innerHTML='OFFLINE · RETRY SUPABASE SYNC';
-  }
-}
-function liveBanner(){
-  if(liveLoading) return '<div class="notice" style="margin-bottom:16px"><b>Connecting to Supabase…</b> Loading customers from storysite-entry.</div>';
-  if(liveError) return '<div class="notice" style="margin-bottom:16px"><b>Supabase API error:</b> '+esc(liveError)+' <button class="button" data-cmd="live-reload" style="margin-left:8px">Retry</button></div>';
-  if(liveReady) return '<div class="notice" style="margin-bottom:16px"><b>Live Supabase mode.</b> Contact-form intake on storysite-entry syncs here. Journey progress still saves in this browser. <button class="button" data-cmd="live-reload">Reload from Supabase</button></div>';
-  return '';
-}
-function mergeLocalJourney(serverPeople, previousPeople){
-  const byId=new Map((previousPeople||[]).map(p=>[String(p.id),p]));
-  const byEmail=new Map((previousPeople||[]).filter(p=>p.email).map(p=>[String(p.email).toLowerCase(),p]));
-  return serverPeople.map(p=>{
-    const prev=byId.get(String(p.id))||byEmail.get(String(p.email||'').toLowerCase());
-    if(!prev) return p;
-    return {
-      ...p,
-      // Supabase is source of truth for inbox vs customers (Prospect vs Active).
-      contactedAt:p.contactedAt,
-      contactMethod:p.contactedAt?(prev.contactMethod||p.contactMethod||''):'',
-      notes:prev.notes||p.notes||'',
-      discovery:Object.keys(prev.discovery||{}).length?prev.discovery:(p.discovery||{}),
-      files:(prev.files&&prev.files.length)?prev.files:(p.files||[]),
-      events:(prev.events&&prev.events.length)?prev.events:(p.events||[]),
-      projects:(p.projects||[]).map(q=>{
-        const pq=(prev.projects||[]).find(x=>String(x.id)===String(q.id));
-        if(!pq) return q;
-        return {
-          ...q,
-          offer:pq.offer||q.offer,
-          offerHistory:(pq.offerHistory&&pq.offerHistory.length)?pq.offerHistory:(q.offerHistory||[]),
-          accepted:pq.accepted||q.accepted,
-          payment:pq.payment||q.payment,
-          startedAt:pq.startedAt||q.startedAt,
-          reviewAt:pq.reviewAt||q.reviewAt,
-          finalApproval:pq.finalApproval||q.finalApproval,
-          delivery:pq.delivery||q.delivery,
-          notes:pq.notes||q.notes||'',
-          events:(pq.events&&pq.events.length)?pq.events:(q.events||[]),
-          files:(pq.files&&pq.files.length)?pq.files:(q.files||[]),
-        };
-      }),
-    };
-  });
-}
-function peopleFromAdmin({inquiries=[],customers=[],projects=[],invoices=[],hosting=[]}){
-  const people=[];
-  const emailIndex=new Map();
-  function upsertPerson(partial){
-    const email=String(partial.email||'').toLowerCase();
-    let p=null;
-    if(partial.id) p=people.find(x=>String(x.id)===String(partial.id));
-    if(!p&&email) p=emailIndex.get(email);
-    if(!p){
-      p={
-        id:partial.id||id('C'),
-        customerId:partial.customerId||'',
-        name:partial.name||'Customer',
-        email:partial.email||'',
-        service:partial.service||'',
-        request:partial.request||'',
-        received:partial.received||'',
-        contactedAt:partial.contactedAt??null,
-        contactMethod:partial.contactMethod||'',
-        notes:partial.notes||'',
-        discovery:{},
-        files:[],
-        projects:[],
-        sourceInquiryId:partial.sourceInquiryId||'',
-        phone:partial.phone||'',
-        customerStatus:partial.customerStatus||'',
-        hosting:partial.hosting||'',
-        requestType:partial.requestType||'',
-        source:'supabase',
-        events:[{at:now(),action:'Loaded from Supabase',detail:'Synced from storysite-entry admin API'}],
-      };
-      people.push(p);
-      if(email) emailIndex.set(email,p);
-      return p;
-    }
-    if(!p.name&&partial.name) p.name=partial.name;
-    if(!p.email&&partial.email) p.email=partial.email;
-    if(!p.service&&partial.service) p.service=partial.service;
-    if(!p.request&&partial.request) p.request=partial.request;
-    if(!p.received&&partial.received) p.received=partial.received;
-    if(p.contactedAt==null&&partial.contactedAt!=null) p.contactedAt=partial.contactedAt;
-    if(!p.sourceInquiryId&&partial.sourceInquiryId) p.sourceInquiryId=partial.sourceInquiryId;
-    if(!p.phone&&partial.phone) p.phone=partial.phone;
-    if(partial.notes&&!p.notes) p.notes=partial.notes;
-    if(partial.customerStatus) p.customerStatus=partial.customerStatus;
-    if(email) emailIndex.set(email,p);
-    return p;
+
+/* Data-only Supabase bridge — no UI/layout changes */
+(function(){
+  const apiBase=(typeof window.STORYSITES_API_BASE==='string'?window.STORYSITES_API_BASE:'').replace(/\/$/,'');
+  async function api(path, opts){
+    opts=opts||{};
+    const res=await fetch(apiBase+path,{...opts,headers:{'Accept':'application/json','Content-Type':'application/json',...(opts.headers||{})}});
+    const body=await res.json().catch(()=>({}));
+    if(!res.ok) throw new Error(body.message||('HTTP '+res.status));
+    return body;
   }
   function formatRequest(inq, c){
     const parts=[];
     const reqType=(inq&&inq.request_type)||'';
     const hosting=(inq&&inq.hosting)||'';
     const details=(inq&&(inq.project_details||inq.notes))||'';
-    // Prefer structured contact-form fields when present.
     if(reqType||hosting||details){
       if(reqType) parts.push('Source: contact form ('+reqType+')');
       if(hosting) parts.push('Hosting preference: '+hosting);
       if(details) parts.push('Details: '+details);
       return parts.join('\n');
     }
-    // Fall back to customer notes already formatted by intake.
     if(c&&c.notes&&/Source:|Hosting preference:|Details:/i.test(c.notes)) return c.notes;
     return (inq&&inq.notes)||(c&&c.notes)||'';
   }
-  for(const c of customers){
-    const inq=inquiries.find(i=>String(i.id)===String(c.inquiry_id||''));
-    // Journey portal: only Active/Completed/Archived customers leave the inbox.
-    // Prospect stays in New inquiries until staff confirms outreach here.
-    const advanced=/^(active|completed|archived)$/i.test(String(c.status||''));
-    const contacted = advanced ? (c.date||now()) : null;
-    upsertPerson({
-      id:String(c.id),
-      customerId:String(c.id),
-      name:c.name||'',
-      email:c.email||'',
-      phone:c.phone||'',
-      service:c.service||inq?.service||'',
-      request:formatRequest(inq,c),
-      received:inq?.date||c.date||'',
-      contactedAt:contacted,
-      contactMethod:contacted?'Supabase sync':'',
-      notes:c.notes||'',
-      sourceInquiryId:c.inquiry_id?String(c.inquiry_id):(inq?String(inq.id):''),
-      customerStatus:c.status||'',
-      hosting:inq?.hosting||'',
-      requestType:inq?.request_type||'',
-    });
-  }
-  for(const i of inquiries){
-    const email=String(i.email||'').toLowerCase();
-    if(people.some(p=>p.sourceInquiryId===String(i.id)||(email&&String(p.email||'').toLowerCase()===email))) continue;
-    // Inquiry-only rows stay in New inquiries until staff confirms contact in this portal.
-    upsertPerson({
-      id:'inq-'+String(i.id),
-      name:i.name||'',
-      email:i.email||'',
-      phone:i.phone||'',
-      service:i.service||'',
-      request:formatRequest(i,null),
-      received:i.date||now(),
-      contactedAt:null,
-      contactMethod:'',
-      notes:'',
-      sourceInquiryId:String(i.id),
-      hosting:i.hosting||'',
-      requestType:i.request_type||'',
-    });
-  }
-  for(const q of projects){
-    let p=people.find(x=>String(x.id)===String(q.customer_id||''))
-      ||people.find(x=>String(x.name||'').toLowerCase()===String(q.name||'').toLowerCase());
-    if(!p){
-      p=upsertPerson({id:q.customer_id?String(q.customer_id):id('C'),name:q.name||'Customer',email:'',service:q.service||'',received:'',contactedAt:now(),contactMethod:'Project sync'});
-    }
-    const inv=invoices.find(x=>String(x.customer_id||'')===String(p.id)||String(x.name||'').toLowerCase()===String(p.name||'').toLowerCase());
-    const host=hosting.find(x=>String(x.customer_id||'')===String(p.id)||String(x.name||'').toLowerCase()===String(p.name||'').toLowerCase());
-    let payment=null;
-    if(inv){
-      const paid=/^paid$/i.test(inv.status||'');
-      payment={
-        invoiceId:String(inv.id),
-        amount:Number(inv.amount)||0,
-        status:inv.status||'Draft',
-        due:inv.due||'',
-        notes:inv.notes||'',
-        verified:paid,
-        reference:paid?('Stripe invoice '+inv.id):'',
-        provider:paid?'Stripe':'',
+  function mergeLocalJourney(serverPeople, previousPeople){
+    const byId=new Map((previousPeople||[]).map(p=>[String(p.id),p]));
+    const byEmail=new Map((previousPeople||[]).filter(p=>p.email).map(p=>[String(p.email).toLowerCase(),p]));
+    return serverPeople.map(p=>{
+      const prev=byId.get(String(p.id))||byEmail.get(String(p.email||'').toLowerCase());
+      if(!prev) return p;
+      return {
+        ...p,
+        contactedAt:p.contactedAt,
+        contactMethod:p.contactedAt?(prev.contactMethod||p.contactMethod||''):'',
+        notes:prev.notes||p.notes||'',
+        discovery:Object.keys(prev.discovery||{}).length?prev.discovery:(p.discovery||{}),
+        discoveryReviewedAt:prev.discoveryReviewedAt||p.discoveryReviewedAt,
+        files:(prev.files&&prev.files.length)?prev.files:(p.files||[]),
+        events:(prev.events&&prev.events.length)?prev.events:(p.events||[]),
+        projects:(p.projects||[]).map(q=>{
+          const pq=(prev.projects||[]).find(x=>String(x.id)===String(q.id));
+          if(!pq) return q;
+          return {
+            ...q,
+            offer:pq.offer||q.offer,
+            offerHistory:(pq.offerHistory&&pq.offerHistory.length)?pq.offerHistory:(q.offerHistory||[]),
+            accepted:pq.accepted||q.accepted,
+            payment:pq.payment||q.payment,
+            startedAt:pq.startedAt||q.startedAt,
+            reviewAt:pq.reviewAt||q.reviewAt,
+            finalApproval:pq.finalApproval||q.finalApproval,
+            delivery:pq.delivery||q.delivery,
+            notes:pq.notes||q.notes||'',
+            events:(pq.events&&pq.events.length)?pq.events:(q.events||[]),
+            files:(pq.files&&pq.files.length)?pq.files:(q.files||[]),
+          };
+        }),
       };
-    }
-    // Placeholder hosting like "managed-hosting-pending" is not a delivery.
-    let delivery=null;
-    if(host&&host.site&&/^https?:\/\//i.test(String(host.site))){
-      delivery={url:host.site,note:host.notes||'',renewal:host.renewal||'',status:host.status||'',at:host.renewal||now()};
-    }
-    // Do not advance build/review milestones for Prospects still in New inquiries.
-    const journeyActive=!!p.contactedAt;
-    p.projects.push({
-      id:String(q.id),
-      kind:'New StorySite',
-      service:q.service||p.service,
-      offer:null,
-      offerHistory:[],
-      accepted:null,
-      payment:journeyActive?payment:null,
-      startedAt:journeyActive&&/development/i.test(q.status||'')?now():null,
-      reviewAt:journeyActive&&/review/i.test(q.status||'')?now():null,
-      finalApproval:null,
-      delivery:journeyActive?delivery:null,
-      notes:q.notes||'',
-      status:q.status||'Not Started',
-      due:q.due||'',
-      events:[{at:now(),action:'Imported project',detail:'Loaded from Supabase · '+(q.status||'')}],
-      files:[],
-      importedFromApi:true,
-      source:'supabase',
     });
   }
-  for(const inv of invoices){
-    let p=people.find(x=>String(x.id)===String(inv.customer_id||''))
-      ||people.find(x=>String(x.name||'').toLowerCase()===String(inv.name||'').toLowerCase());
-    if(!p) continue;
-    const hasPay=p.projects.some(q=>q.payment&&String(q.payment.invoiceId)===String(inv.id));
-    if(hasPay) continue;
-    if(!p.projects.length){
-      p.projects.push({id:id('P'),kind:'New StorySite',service:p.service,offer:null,offerHistory:[],accepted:null,payment:null,startedAt:null,reviewAt:null,finalApproval:null,delivery:null,notes:'',events:[],files:[],importedFromApi:true,source:'supabase'});
+  function peopleFromAdmin(payload){
+    const inquiries=payload.inquiries||[];
+    const customers=payload.customers||[];
+    const projects=payload.projects||[];
+    const invoices=payload.invoices||[];
+    const hosting=payload.hosting||[];
+    const people=[];
+    const emailIndex=new Map();
+    function upsertPerson(partial){
+      const email=String(partial.email||'').toLowerCase();
+      let p=null;
+      if(partial.id) p=people.find(x=>String(x.id)===String(partial.id));
+      if(!p&&email) p=emailIndex.get(email);
+      if(!p){
+        p={
+          id:partial.id||id('C'),
+          customerId:partial.customerId||'',
+          name:partial.name||'Customer',
+          email:partial.email||'',
+          service:partial.service||'',
+          request:partial.request||'',
+          received:partial.received||'',
+          contactedAt:partial.contactedAt==null?null:partial.contactedAt,
+          contactMethod:partial.contactMethod||'',
+          notes:partial.notes||'',
+          discovery:{},
+          files:[],
+          projects:[],
+          sourceInquiryId:partial.sourceInquiryId||'',
+          phone:partial.phone||'',
+          customerStatus:partial.customerStatus||'',
+          source:'supabase',
+          events:[{at:now(),action:'Inquiry received',detail:'Loaded from database'}],
+        };
+        people.push(p);
+        if(email) emailIndex.set(email,p);
+        return p;
+      }
+      if(!p.name&&partial.name) p.name=partial.name;
+      if(!p.email&&partial.email) p.email=partial.email;
+      if(!p.service&&partial.service) p.service=partial.service;
+      if(!p.request&&partial.request) p.request=partial.request;
+      if(!p.received&&partial.received) p.received=partial.received;
+      if(p.contactedAt==null&&partial.contactedAt!=null) p.contactedAt=partial.contactedAt;
+      if(!p.sourceInquiryId&&partial.sourceInquiryId) p.sourceInquiryId=partial.sourceInquiryId;
+      if(!p.customerId&&partial.customerId) p.customerId=partial.customerId;
+      if(!p.phone&&partial.phone) p.phone=partial.phone;
+      if(partial.notes&&!p.notes) p.notes=partial.notes;
+      if(partial.customerStatus) p.customerStatus=partial.customerStatus;
+      if(email) emailIndex.set(email,p);
+      return p;
     }
-    const q=p.projects[0];
-    if(!q.payment&&p.contactedAt){
-      const paid=/^paid$/i.test(inv.status||'');
-      q.payment={invoiceId:String(inv.id),amount:Number(inv.amount)||0,status:inv.status||'Draft',due:inv.due||'',notes:inv.notes||'',verified:paid,reference:paid?('Stripe invoice '+inv.id):'',provider:paid?'Stripe':''};
+    for(const c of customers){
+      const inq=inquiries.find(i=>String(i.id)===String(c.inquiry_id||''));
+      const advanced=/^(active|completed|archived)$/i.test(String(c.status||''));
+      upsertPerson({
+        id:String(c.id),
+        customerId:String(c.id),
+        name:c.name||'',
+        email:c.email||'',
+        phone:c.phone||'',
+        service:c.service||(inq&&inq.service)||'',
+        request:formatRequest(inq,c),
+        received:(inq&&inq.date)||c.date||'',
+        contactedAt:advanced?(c.date||now()):null,
+        contactMethod:advanced?'Email sent':'',
+        notes:c.notes||'',
+        sourceInquiryId:c.inquiry_id?String(c.inquiry_id):(inq?String(inq.id):''),
+        customerStatus:c.status||'',
+      });
     }
+    for(const i of inquiries){
+      const email=String(i.email||'').toLowerCase();
+      if(people.some(p=>p.sourceInquiryId===String(i.id)||(email&&String(p.email||'').toLowerCase()===email))) continue;
+      upsertPerson({
+        id:'inq-'+String(i.id),
+        name:i.name||'',
+        email:i.email||'',
+        phone:i.phone||'',
+        service:i.service||'',
+        request:formatRequest(i,null),
+        received:i.date||now(),
+        contactedAt:null,
+        contactMethod:'',
+        notes:'',
+        sourceInquiryId:String(i.id),
+      });
+    }
+    for(const q of projects){
+      let p=people.find(x=>String(x.customerId||x.id)===String(q.customer_id||''))
+        ||people.find(x=>String(x.name||'').toLowerCase()===String(q.name||'').toLowerCase());
+      if(!p) continue;
+      const inv=invoices.find(x=>String(x.customer_id||'')===String(p.customerId||p.id)||String(x.name||'').toLowerCase()===String(p.name||'').toLowerCase());
+      const host=hosting.find(x=>String(x.customer_id||'')===String(p.customerId||p.id)||String(x.name||'').toLowerCase()===String(p.name||'').toLowerCase());
+      let payment=null;
+      if(inv&&p.contactedAt){
+        const paid=/^paid$/i.test(inv.status||'');
+        payment={invoiceId:String(inv.id),amount:Number(inv.amount)||0,status:inv.status||'Draft',due:inv.due||'',notes:inv.notes||'',verified:paid,reference:paid?('Stripe invoice '+inv.id):'',provider:paid?'Stripe':''};
+      }
+      let delivery=null;
+      if(p.contactedAt&&host&&host.site&&/^https?:\/\//i.test(String(host.site))){
+        delivery={url:host.site,note:host.notes||'',renewal:host.renewal||'',status:host.status||'',at:host.renewal||now()};
+      }
+      p.projects.push({
+        id:String(q.id),
+        kind:'New StorySite',
+        service:q.service||p.service,
+        offer:null,
+        offerHistory:[],
+        accepted:null,
+        payment,
+        startedAt:p.contactedAt&&/development/i.test(q.status||'')?now():null,
+        reviewAt:p.contactedAt&&/review/i.test(q.status||'')?now():null,
+        finalApproval:null,
+        delivery,
+        notes:q.notes||'',
+        events:[{at:now(),action:'Imported project',detail:q.status||''}],
+        files:[],
+        source:'supabase',
+      });
+    }
+    return people;
   }
-  for(const h of hosting){
-    let p=people.find(x=>String(x.id)===String(h.customer_id||''))
-      ||people.find(x=>String(x.name||'').toLowerCase()===String(h.name||'').toLowerCase());
-    if(!p) continue;
-    if(!p.projects.length){
-      p.projects.push({id:id('P'),kind:'New StorySite',service:p.service,offer:null,offerHistory:[],accepted:null,payment:null,startedAt:null,reviewAt:null,finalApproval:null,delivery:null,notes:'',events:[],files:[],importedFromApi:true,source:'supabase'});
-    }
-    const q=p.projects.find(x=>!x.delivery)||p.projects[0];
-    if(!q.delivery&&p.contactedAt&&/^https?:\/\//i.test(String(h.site||''))){
-      q.delivery={url:h.site||'',note:h.notes||'',renewal:h.renewal||'',status:h.status||'',at:now()};
-    }
-  }
-  return people;
-}
-async function loadLiveData(opts){
-  opts=opts||{};
-  liveLoading=true; liveError='';
-  if(!opts.silent) try{render()}catch(e){}
-  try{
+  async function loadFromDatabase(){
     const results=await Promise.all([
       api('/api/admin/inquiries'),
       api('/api/admin/customers'),
@@ -508,40 +437,43 @@ async function loadLiveData(opts){
       api('/api/admin/invoices'),
       api('/api/admin/hosting'),
     ]);
-    const inq=results[0], cust=results[1], proj=results[2], inv=results[3], host=results[4];
     const previous=state.people||[];
     const serverPeople=peopleFromAdmin({
-      inquiries:inq.inquiries||[],
-      customers:cust.customers||[],
-      projects:proj.projects||[],
-      invoices:inv.invoices||[],
-      hosting:host.hosting||[],
+      inquiries:results[0].inquiries||[],
+      customers:results[1].customers||[],
+      projects:results[2].projects||[],
+      invoices:results[3].invoices||[],
+      hosting:results[4].hosting||[],
     });
     state.people=mergeLocalJourney(serverPeople, previous);
     state.meta=state.meta||{};
     state.meta.demo=false;
-    state.meta.live=true;
-    state.meta.liveNotice='Connected to Supabase via storysite-entry.';
-    liveReady=true;
     persist();
-  }catch(err){
-    liveReady=false;
-    liveError=err.message||String(err);
-    console.error('Failed to load portal data from Supabase', err);
-  }finally{
-    liveLoading=false;
-    try{render()}catch(e){console.error(e)}
   }
-}
-async function collectStripePayment(invoiceId){
-  try{
-    const body=await api('/api/create-checkout-session',{method:'POST',body:JSON.stringify({invoice_id:invoiceId})});
-    if(body.url){ location.href=body.url; return; }
-    throw new Error('Checkout session did not return a URL.');
-  }catch(err){
-    alert('Could not start Stripe Checkout: '+(err.message||err));
-  }
-}
+  window.StorySitesDB={
+    reload:loadFromDatabase,
+    async createInquiry(person){
+      const created=await api('/api/admin/inquiries',{method:'POST',body:JSON.stringify({
+        name:person.name,email:person.email,service:person.service,notes:person.request||'',request_type:'General inquiry'
+      })});
+      return created.inquiry||created;
+    },
+    async confirmContact(person){
+      const cid=person.customerId||(/^\d+$/.test(String(person.id))?person.id:null);
+      if(cid){
+        await api('/api/admin/customers/'+encodeURIComponent(cid),{method:'PATCH',body:JSON.stringify({status:'Active',notes:person.notes||''})});
+        person.customerId=String(cid);
+        person.customerStatus='Active';
+      }
+      if(person.sourceInquiryId){
+        await api('/api/admin/inquiries/'+encodeURIComponent(person.sourceInquiryId),{method:'PATCH',body:JSON.stringify({status:'Contacted'})});
+      }
+    }
+  };
+  loadFromDatabase().then(function(){render()}).catch(function(err){
+    console.error('Supabase load failed; showing local data', err);
+    render();
+  });
+})();
 
-loadLiveData();
 </script></body></html>
