@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import { STORYSITES_ALLOWED_ORIGINS } from "./origins.mjs";
 
 export function getSupabaseAdmin() {
   const supabaseUrl = (process.env.SUPABASE_URL || "").trim();
@@ -314,15 +315,9 @@ export const resourceStatus = {
 };
 
 export function json(statusCode, body, origin = "") {
-  const allowed = new Set([
-    "https://storysites-mgmt-portal.netlify.app",
-    "https://storysite-entry.netlify.app",
-    "http://localhost:8888",
-    "http://127.0.0.1:8888",
-    "http://localhost:8890",
-    "http://127.0.0.1:8890",
-  ]);
-  const allow = origin && allowed.has(origin) ? origin : "*";
+  // Prefer the request origin when allowlisted; otherwise * for same-site / tooling.
+  const allow =
+    origin && STORYSITES_ALLOWED_ORIGINS.has(origin) ? origin : "*";
   return {
     statusCode,
     headers: {
@@ -334,3 +329,5 @@ export function json(statusCode, body, origin = "") {
     body: JSON.stringify(body),
   };
 }
+
+export { STORYSITES_ALLOWED_ORIGINS };

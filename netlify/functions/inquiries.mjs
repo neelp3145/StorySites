@@ -1,19 +1,9 @@
 import { getSupabaseAdmin } from "../lib/supabase.mjs";
 import { syncIntakeFromInquiry } from "../lib/intake.mjs";
-
-const ALLOWED_ORIGINS = new Set([
-  "https://storysite-entry.netlify.app",
-  "https://storysites-mgmt-portal.netlify.app",
-  "http://localhost:8888",
-  "http://127.0.0.1:8888",
-  "http://localhost:3999",
-  "http://127.0.0.1:3999",
-  "http://localhost:5500",
-  "http://127.0.0.1:5500",
-]);
+import { allowOrigin, STORYSITES_ENTRY_DEFAULT } from "../lib/origins.mjs";
 
 function corsHeaders(origin) {
-  const allow = origin && ALLOWED_ORIGINS.has(origin) ? origin : "https://storysite-entry.netlify.app";
+  const allow = allowOrigin(origin, STORYSITES_ENTRY_DEFAULT);
   return {
     "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "POST, OPTIONS",

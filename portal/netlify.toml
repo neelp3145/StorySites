@@ -1,5 +1,12 @@
-# Used when the storysites-mgmt-portal Netlify site sets
-# Base directory = portal (so the root netlify.toml does not force publish = site).
+# Used when the portal-experiment Netlify site sets
+# Base directory = portal (so the root netlify.toml does not force publish=site).
 [build]
   publish = "."
-  command = "echo 'StorySites management portal'"
+  # No functions here — admin APIs live on storysite-entry.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
