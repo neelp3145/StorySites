@@ -1,63 +1,57 @@
 # StorySites management portal
 
-Private-staff UI for **https://portal-experiment.netlify.app**
-(Simple Customer Journey).
+UI for **https://portal-experiment.netlify.app** (Simple Customer Journey).
 
-Public contact form submissions on storysite-entry create an **Inquiry** and
-also upsert a **Customer**, then create linked **Project**, draft **Invoice**,
-and **Hosting** records. This portal loads those records from Supabase via the
-storysite-entry admin API and maps them into the customer journey UI.
+This folder is the portal Netlify site. It has **no functions**. All database
+traffic goes to **storysite-entry**:
 
-| Journey data | API |
+| Portal data | Backend |
 | --- | --- |
-| New inquiries / people | `/api/admin/inquiries` + `/api/admin/customers` |
-| Projects | `/api/admin/projects` |
-| Payment (invoice) | `/api/admin/invoices` + `/api/create-checkout-session` |
-| Hosting / delivery URL | `/api/admin/hosting` |
+| New inquiries / customers | `GET/POST/PATCH /api/admin/inquiries` · `/api/admin/customers` |
+| Projects / invoices / hosting | `/api/admin/projects` · `/invoices` · `/hosting` |
+| Stripe Checkout | `POST /api/create-checkout-session` |
 
-Staff journey progress (discovery notes, offer drafts, local files) still saves
-in the browser and is merged back when you reload from Supabase.
+Contact-form posts on the public site already create inquiry + customer (+
+project / draft invoice / hosting). This portal loads those rows from Supabase
+and maps them into the journey UI.
 
-## One-time Supabase setup
+- **Prospect** customers and open inquiries → **New inquiries**
+- **Active** (after you confirm outreach) → **Customers**
+- Confirming outreach **PATCHes** customer → Active and inquiry → Contacted
+- Offer drafts / uploaded files still save in the browser for now
 
-Run these in order in the Supabase SQL Editor if you have not already:
-
-1. `supabase/migrations/001_create_inquiries.sql`
-2. `supabase/migrations/002_expand_inquiry_status.sql`
-3. `supabase/migrations/003_create_customers.sql`
-4. `supabase/migrations/004_create_projects_invoices_hosting.sql`
-5. `supabase/migrations/005_invoice_stripe_fields.sql` (for Stripe Checkout)
-
-## Local run
-
-```bash
-npm run portal:dev
-```
-
-Open http://127.0.0.1:8890
-
-## Deploy to portal-experiment
+## Deploy portal-experiment
 
 | Setting | Value |
 | --- | --- |
-| Branch | `main` (or this feature branch while testing) |
+| Repository | this StorySites repo |
+| Branch | `main` (or `cursor/portal-experiment-89d3` while testing) |
 | **Base directory** | `portal` |
 | Publish directory | `.` |
-| Functions | leave empty / unused |
+| Functions | leave empty |
 
-Also redeploy **storysite-entry** so CORS allows
-`https://portal-experiment.netlify.app` and admin functions stay live.
+## Deploy / env on storysite-entry
 
-On **storysite-entry** Netlify env, set:
+Redeploy **storysite-entry** from the same branch so CORS allows
+`https://portal-experiment.netlify.app`.
+
+Set:
 
 ```
 STORYSITES_PORTAL_URL=https://portal-experiment.netlify.app
+SUPABASE_URL=…
+SUPABASE_SERVICE_ROLE_KEY=…
 ```
 
-## Stripe payments
+Optional Stripe: `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`.
 
-1. On **storysite-entry**, set `STRIPE_SECRET_KEY` and `STRIPE_WEBHOOK_SECRET`.
-2. Stripe webhook endpoint: `https://storysite-entry.netlify.app/api/stripe-webhook`  
-   Event: `checkout.session.completed`
-3. On a customer with a linked invoice, open **Record payment** and use
-   **Collect payment via Stripe Checkout** when an invoice id is present.
+## Local
+
+```bash
+# Portal UI calling production entry API (default)
+npx --yes serve portal -l 8765
+
+# Or Netlify Dev with local functions:
+#   npm run portal:dev
+#   open http://127.0.0.1:8890/?api=local
+```
