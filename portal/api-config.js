@@ -1,12 +1,8 @@
-// Management portal API base.
-// Local (npm run portal:dev): same origin → Netlify Dev functions.
-// Production (storysites-mgmt-portal): call the StorySites entry site,
-// which already has /api/admin/inquiries → Supabase.
+// Portal has no Netlify functions — always call storysite-entry admin APIs.
+// Use ?api=local only when running `npm run portal:dev` with local functions.
 (function () {
   if (typeof window.STORYSITES_API_BASE === "string") return;
-  const host = window.location.hostname;
-  const local = host === "localhost" || host === "127.0.0.1";
-  window.STORYSITES_API_BASE = local
-    ? ""
-    : "https://storysite-entry.netlify.app";
+  const params = new URLSearchParams(location.search);
+  window.STORYSITES_API_BASE =
+    params.get("api") === "local" ? "" : "https://storysite-entry.netlify.app";
 })();

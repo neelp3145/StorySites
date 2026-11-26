@@ -56,9 +56,12 @@ npm run portal:dev
 
 Open http://127.0.0.1:8890 → **Inquiries**.
 
-Deploy to https://storysites-mgmt-portal.netlify.app with **Base directory =
-`portal`** (so the root config does not publish the marketing `site/`).
-Details: [`portal/README.md`](portal/README.md).
+Deploy the management UI to https://portal-experiment.netlify.app with
+**Base directory = `portal`** (so the root config does not publish the
+marketing `site/`). Details: [`portal/README.md`](portal/README.md).
+
+On **storysite-entry**, set `STORYSITES_PORTAL_URL=https://portal-experiment.netlify.app`
+so Stripe cancel URLs and CORS point at the live portal.
 
 ## Stripe Checkout
 

@@ -1,5 +1,6 @@
 import { getSupabaseAdmin, json } from "../lib/supabase.mjs";
 import { appOrigin, getStripe } from "../lib/stripe.mjs";
+import { STORYSITES_PORTAL_DEFAULT } from "../lib/origins.mjs";
 
 export async function handler(event) {
   const origin = event.headers.origin || event.headers.Origin || "";
@@ -62,11 +63,9 @@ export async function handler(event) {
     }
 
     const base = appOrigin(event);
-    const portal =
-      (process.env.STORYSITES_PORTAL_URL || "https://storysites-mgmt-portal.netlify.app").replace(
-        /\/$/,
-        ""
-      );
+    const portal = (
+      process.env.STORYSITES_PORTAL_URL || STORYSITES_PORTAL_DEFAULT
+    ).replace(/\/$/, "");
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -87,7 +86,7 @@ export async function handler(event) {
         },
       ],
       success_url: `${base}/pay/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${portal}/?page=invoices&checkout=cancelled`,
+      cancel_url: `${portal}/?checkout=cancelled`,
       metadata: {
         invoice_id: String(invoice.id),
         customer_name: invoice.customer_name || "",
