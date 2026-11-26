@@ -347,13 +347,13 @@ document.addEventListener('change',async e=>{if(e.target.id==='restore-file'){le
       if(!p.name&&partial.name) p.name=partial.name;
       if(!p.email&&partial.email) p.email=partial.email;
       if(!p.service&&partial.service) p.service=partial.service;
-      if(!p.request&&partial.request) p.request=partial.request;
+      if(partial.request&&(!p.request||partial.request.length>p.request.length)) p.request=partial.request;
       if(!p.received&&partial.received) p.received=partial.received;
       if(p.contactedAt==null&&partial.contactedAt!=null) p.contactedAt=partial.contactedAt;
-      if(!p.sourceInquiryId&&partial.sourceInquiryId) p.sourceInquiryId=partial.sourceInquiryId;
-      if(!p.customerId&&partial.customerId) p.customerId=partial.customerId;
+      if(partial.sourceInquiryId) p.sourceInquiryId=String(partial.sourceInquiryId);
+      if(partial.customerId) p.customerId=String(partial.customerId);
       if(!p.phone&&partial.phone) p.phone=partial.phone;
-      if(partial.notes&&!p.notes) p.notes=partial.notes;
+      if(partial.notes&&(!p.notes||partial.notes.length>p.notes.length)) p.notes=partial.notes;
       if(partial.customerStatus) p.customerStatus=partial.customerStatus;
       if(email) emailIndex.set(email,p);
       return p;
@@ -429,7 +429,7 @@ document.addEventListener('change',async e=>{if(e.target.id==='restore-file'){le
     for(const q of projects){
       let p=people.find(x=>String(x.customerId||x.id)===String(q.customer_id||''))
         ||people.find(x=>String(x.name||'').toLowerCase()===String(q.name||'').toLowerCase());
-      if(!p) continue;
+      if(!p||!p.contactedAt) continue;
       const inv=invoices.find(x=>String(x.customer_id||'')===String(p.customerId||p.id)||String(x.name||'').toLowerCase()===String(p.name||'').toLowerCase());
       const host=hosting.find(x=>String(x.customer_id||'')===String(p.customerId||p.id)||String(x.name||'').toLowerCase()===String(p.name||'').toLowerCase());
       let payment=null;
@@ -506,6 +506,7 @@ document.addEventListener('change',async e=>{if(e.target.id==='restore-file'){le
       if(person.sourceInquiryId){
         await api('/api/admin/inquiries/'+encodeURIComponent(person.sourceInquiryId),{method:'PATCH',body:JSON.stringify({status:'Contacted'})});
       }
+      try{await loadFromDatabase()}catch(err){console.warn('Reload after contact failed',err)}
     }
   };
   loadFromDatabase().then(function(){render()}).catch(function(err){
