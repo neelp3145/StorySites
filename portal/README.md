@@ -13,6 +13,10 @@ Layout and styling are unchanged — only the data source was wired.
 | Overview metrics | Derived from the same people list |
 | File library | Still browser-local in this UI (unchanged) |
 
+Confirm Contact creates/updates the Supabase customer (never treats an
+inquiry id as a customer id) and marks the inquiry `Contacted`, then
+reloads from `/api/admin/*`.
+
 ## Local preview
 
 ```bash
