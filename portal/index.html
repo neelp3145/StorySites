@@ -358,9 +358,27 @@ document.addEventListener('change',async e=>{if(e.target.id==='restore-file'){le
       if(email) emailIndex.set(email,p);
       return p;
     }
+    function outreachDone(inq,c){
+      const st=String((inq&&inq.status)||'');
+      // Inquiry stage is the journey source of truth for first outreach.
+      if(/^(Contacted|Proposal Sent|Converted|Closed)$/i.test(st)) return true;
+      if(/^(New)$/i.test(st)) return false;
+      // No open New inquiry: completed/archived customers are past outreach.
+      if(/^(Completed|Archived)$/i.test(String((c&&c.status)||''))) return true;
+      // Active customer with no linked inquiry is already in the pipeline.
+      if(!inq&&/^(Active)$/i.test(String((c&&c.status)||''))) return true;
+      return false;
+    }
+    function findInquiryForCustomer(c){
+      const byId=inquiries.find(i=>String(i.id)===String(c.inquiry_id||''));
+      if(byId) return byId;
+      const email=String(c.email||'').toLowerCase();
+      if(!email) return null;
+      return inquiries.find(i=>String(i.email||'').toLowerCase()===email)||null;
+    }
     for(const c of customers){
-      const inq=inquiries.find(i=>String(i.id)===String(c.inquiry_id||''));
-      const advanced=/^(active|completed|archived)$/i.test(String(c.status||''));
+      const inq=findInquiryForCustomer(c);
+      const done=outreachDone(inq,c);
       upsertPerson({
         id:String(c.id),
         customerId:String(c.id),
@@ -370,16 +388,30 @@ document.addEventListener('change',async e=>{if(e.target.id==='restore-file'){le
         service:c.service||(inq&&inq.service)||'',
         request:formatRequest(inq,c),
         received:(inq&&inq.date)||c.date||'',
-        contactedAt:advanced?(c.date||now()):null,
-        contactMethod:advanced?'Email sent':'',
+        contactedAt:done?(c.date||(inq&&inq.date)||now()):null,
+        contactMethod:done?'Email sent':'',
         notes:c.notes||'',
-        sourceInquiryId:c.inquiry_id?String(c.inquiry_id):(inq?String(inq.id):''),
+        sourceInquiryId:(c.inquiry_id?String(c.inquiry_id):(inq?String(inq.id):'')),
         customerStatus:c.status||'',
       });
     }
     for(const i of inquiries){
       const email=String(i.email||'').toLowerCase();
-      if(people.some(p=>p.sourceInquiryId===String(i.id)||(email&&String(p.email||'').toLowerCase()===email))) continue;
+      const existing=people.find(p=>p.sourceInquiryId===String(i.id)||(email&&String(p.email||'').toLowerCase()===email));
+      if(existing){
+        if(!existing.sourceInquiryId) existing.sourceInquiryId=String(i.id);
+        if(!existing.request) existing.request=formatRequest(i,null);
+        if(!existing.received) existing.received=i.date||existing.received;
+        if(outreachDone(i,{status:existing.customerStatus})){
+          if(!existing.contactedAt) existing.contactedAt=i.date||now();
+          if(!existing.contactMethod) existing.contactMethod='Email sent';
+        }else if(/^(New)$/i.test(String(i.status||''))){
+          // Keep New inquiries in the inbox even if intake marked the customer Active.
+          existing.contactedAt=null;
+          existing.contactMethod='';
+        }
+        continue;
+      }
       upsertPerson({
         id:'inq-'+String(i.id),
         name:i.name||'',
@@ -388,8 +420,8 @@ document.addEventListener('change',async e=>{if(e.target.id==='restore-file'){le
         service:i.service||'',
         request:formatRequest(i,null),
         received:i.date||now(),
-        contactedAt:null,
-        contactMethod:'',
+        contactedAt:outreachDone(i,null)?(i.date||now()):null,
+        contactMethod:outreachDone(i,null)?'Email sent':'',
         notes:'',
         sourceInquiryId:String(i.id),
       });
@@ -454,7 +486,13 @@ document.addEventListener('change',async e=>{if(e.target.id==='restore-file'){le
     reload:loadFromDatabase,
     async createInquiry(person){
       const created=await api('/api/admin/inquiries',{method:'POST',body:JSON.stringify({
-        name:person.name,email:person.email,service:person.service,notes:person.request||'',request_type:'General inquiry'
+        name:person.name,
+        email:person.email,
+        service:person.service,
+        notes:person.request||'',
+        project_details:person.request||'',
+        request_type:'General inquiry',
+        status:'New'
       })});
       return created.inquiry||created;
     },
