@@ -93,7 +93,7 @@ function actionBox(p,q,s,actualS){actualS=actualS==null?s:actualS;
   if(s===0&&p.contactedAt)return `<h2>Contact completed</h2><p>First outreach was confirmed on ${short(p.contactedAt)} via ${esc(p.contactMethod||'outreach')}. Use the arrows to move forward through Discover and Offer.</p>`;
   if(!p.contactedAt)return `<h2>Send the introduction first</h2><p>This inquiry remains <strong>New</strong>. Review the request, then actually send the Gmail introduction or make a phone call. Only afterward confirm that outreach occurred. Discovery fields, uploads, and proposal creation remain locked until then.</p><div class="row"><button class="button primary" data-cmd="intro-email:${esc(p.id)}">Open Introduction Draft in Gmail →</button><button class="button" data-cmd="contact:${esc(p.id)}">Confirm I Contacted Them</button></div>`;
   if(s===1&&!p.discoveryReviewedAt&&!Object.values(p.discovery||{}).some(Boolean))return `<h2>Begin customer discovery</h2><p>You've confirmed first outreach. Now capture the customer's needs and materials during your discussion. Save discovery when you're ready to begin the offer.</p><div class="row"><button class="button primary" data-cmd="discovery">Begin Customer Discovery →</button></div>`;
-  const actions=[['Initial inquiry','Reach out by phone or email, then confirm Contacted.','contact:'+p.id,'Mark Contacted'],['Discovery recorded','You can return to discovery at any time, even after sending the offer.','offer','Prepare Personalized Offer'],['Discovery recorded','Prepare a branded offer based on the agreed scope.','offer','Create Personalized Offer'],['Offer draft saved','Opens Gmail with the customer recipient, your sender account, and subject prefilled. Attach the downloaded offer HTML, then send.','offer-email','Preview & Send Branded Offer'],['Offer sent — awaiting customer','Once the approval email arrives, import it and confirm the details.','import-approval','Import Approval Email'],['Acceptance recorded','Request payment, then record verified full payment.','payment','Record Verified Payment'],['Paid — ready to start','Start the approved project.','start','Start Build'],['Build in progress','Share a preview with the customer for feedback.','review','Send for Customer Review'],['Customer reviewing','After revisions, record the customer’s final authorization to publish.','final','Record Final Approval'],['Ready to publish','Record the final live URL or delivered HTML and close the job.','delivery','Record Delivery & Close'],['Project closed','Original project is complete. Create a separate modification for future paid changes.','modification','＋ New Modification']];
+  const actions=[['Initial inquiry','Reach out by phone or email, then confirm Contacted.','contact:'+p.id,'Mark Contacted'],['Discovery recorded','You can return to discovery at any time, even after sending the offer.','offer','Prepare Personalized Offer'],['Discovery recorded','Prepare a branded offer based on the agreed scope.','offer','Create Personalized Offer'],['Offer draft saved','Opens Gmail with the customer recipient, your sender account, and subject prefilled. Attach the downloaded offer HTML, then send.','offer-email','Preview & Send Branded Offer'],['Offer sent — awaiting customer','When the customer has sent their confirmation, verify it here to unlock Payment.','import-approval','Confirm Customer Approval'],['Acceptance recorded','Request payment, then record verified full payment.','payment','Record Verified Payment'],['Paid — ready to start','Start the approved project.','start','Start Build'],['Build in progress','Share a preview with the customer for feedback.','review','Send for Customer Review'],['Customer reviewing','After revisions, record the customer’s final authorization to publish.','final','Record Final Approval'],['Ready to publish','Record the final live URL or delivered HTML and close the job.','delivery','Record Delivery & Close'],['Project closed','Original project is complete. Create a separate modification for future paid changes.','modification','＋ New Modification']];
   let [title,desc,cmd,label]=actions[s]||actions[1];
   const browsingPast=actualS!=null&&s<actualS;
   const browsingFuture=actualS!=null&&s>actualS;
@@ -104,7 +104,7 @@ function actionBox(p,q,s,actualS){actualS=actualS==null?s:actualS;
     return `<h2>${title}</h2><p>${desc}</p><div class="row"><button class="button primary" data-cmd="offer-email">Preview & Send Branded Offer →</button><button class="button" data-cmd="offer-sent">I've sent the offer</button><button class="button" data-cmd="offer">Edit offer</button></div>`;
   }
   if(s===3&&q?.offer?.sentAt){
-    return `<h2>Offer sent — awaiting customer</h2><p>Proposal v${esc(q.offer.version)} was marked sent. Import the customer approval email when it arrives, or use the arrows to review other stages.</p><div class="row"><button class="button primary" data-cmd="import-approval">Import Approval Email →</button><button class="button" data-cmd="preview">View Offer</button></div>`;
+    return `<h2>Offer sent — awaiting customer</h2><p>Proposal v${esc(q.offer.version)} was marked sent. When ${esc(p.name)} has sent their confirmation, verify it here to unlock Payment.</p><div class="row"><button class="button primary" data-cmd="import-approval">Confirm Customer Approval →</button><button class="button" data-cmd="preview">View Offer</button></div>`;
   }
   return `<h2>${title}</h2><p>${desc}</p><div class="row"><button class="button primary" data-cmd="${cmd}">${label} →</button>${q?.offer?`<button class="button" data-cmd="${q.accepted?'preview':'offer'}">${q.accepted?'View Offer':'Edit offer'}</button>`:''}</div>`;
 }
@@ -215,9 +215,24 @@ async function sendBrandedOffer(){
 // or a secured inbound-mail webhook, validation, logging, and deduplication.
 function importApproval(){
  let p=person(),q=project(p);
- if(!q?.offer?.sentAt)return alert('First send the offer and record that it was sent.');
+ if(!q?.offer?.sentAt)return alert('First mark the offer as sent.');
  if(q.accepted)return alert('This proposal already has recorded acceptance.');
- modal('Import Customer Approval Email',`<div class="notice"><b>Simple process:</b> Open the reply in your business Gmail, confirm the actual sender is ${esc(p.email)}, then copy the complete approval email into this box. You may instead upload a saved .eml or .txt message. The portal checks the proposal details, but you must personally confirm the email is genuine before recording acceptance.</div><div class="kv"><span class="label">Customer</span><b>${esc(p.name)} (${esc(p.email)})</b></div><div class="kv"><span class="label">Expected proposal</span><b>${esc(q.id)} · v${esc(q.offer.version)} · ${money(q.offer.total)}</b></div><form id="approval-import-form"><label class="field"><b>Actual sender address shown in Gmail *</b><input type="email" name="actualSender" required placeholder="Sender email address"></label><label class="field"><b>Paste complete approval email *</b><textarea name="approvalText" required style="min-height:240px" placeholder="Paste the customer's approval email, including the StorySites approval details at the bottom."></textarea></label><label class="field"><b>Or load an email file (.eml or .txt)</b><input id="approval-email-file" type="file" accept=".eml,.txt,text/plain,message/rfc822"><small>File contents will fill the box above. Nothing is uploaded to a server in this prototype.</small></label><label class="field"><input type="checkbox" name="reviewedOriginal" required>I checked the original received message in Gmail and verified the sender, approval wording, and approved amount.</label><button class="button orange" type="submit">Check Email & Record Approval</button></form>`);
+ if(!confirm('Confirm that '+p.name+' ('+p.email+') has sent approval for proposal v'+q.offer.version+' totaling '+money(q.offer.total)+'?\n\nThis unlocks the Payment stage.'))return;
+ q.accepted={
+   at:now(),
+   method:'Staff verified customer confirmation received',
+   evidence:'Customer confirmation verified in portal',
+   sender:p.email,
+   approvedBy:p.name,
+   version:q.offer.version,
+   termsVersion:q.offer.termsVersion,
+   total:q.offer.total
+ };
+ log(p,'Customer approval confirmed','Offer '+q.id+' v'+q.offer.version+' · '+money(q.offer.total));
+ stageFocus=phaseIndexFor(step(p));
+ persist();
+ closeModal();
+ render();
 }
 function checkApprovalMail(raw,p,q,sender){
  const body=String(raw||'');
