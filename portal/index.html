@@ -93,7 +93,7 @@ function actionBox(p,q,s,actualS){actualS=actualS==null?s:actualS;
   if(s===0&&p.contactedAt)return `<h2>Contact completed</h2><p>First outreach was confirmed on ${short(p.contactedAt)} via ${esc(p.contactMethod||'outreach')}. Use the arrows to move forward through Discover and Offer.</p>`;
   if(!p.contactedAt)return `<h2>Send the introduction first</h2><p>This inquiry remains <strong>New</strong>. Review the request, then actually send the Gmail introduction or make a phone call. Only afterward confirm that outreach occurred. Discovery fields, uploads, and proposal creation remain locked until then.</p><div class="row"><button class="button primary" data-cmd="intro-email:${esc(p.id)}">Open Introduction Draft in Gmail →</button><button class="button" data-cmd="contact:${esc(p.id)}">Confirm I Contacted Them</button></div>`;
   if(s===1&&!p.discoveryReviewedAt&&!Object.values(p.discovery||{}).some(Boolean))return `<h2>Begin customer discovery</h2><p>You've confirmed first outreach. Now capture the customer's needs and materials during your discussion. Save discovery when you're ready to begin the offer.</p><div class="row"><button class="button primary" data-cmd="discovery">Begin Customer Discovery →</button></div>`;
-  const actions=[['Initial inquiry','Reach out by phone or email, then confirm Contacted.','contact:'+p.id,'Mark Contacted'],['Discovery recorded','You can return to discovery at any time, even after sending the offer.','offer','Prepare Personalized Offer'],['Discovery recorded','Prepare a branded offer based on the agreed scope.','offer','Create Personalized Offer'],['Offer draft saved','Preview the customer email, confirm recipient and total, then send the branded offer.','preview','Preview & Send Branded Offer'],['Offer sent — awaiting customer','Once the approval email arrives, import it and confirm the details.','import-approval','Import Approval Email'],['Acceptance recorded','Request payment, then record verified full payment.','payment','Record Verified Payment'],['Paid — ready to start','Start the approved project.','start','Start Build'],['Build in progress','Share a preview with the customer for feedback.','review','Send for Customer Review'],['Customer reviewing','After revisions, record the customer’s final authorization to publish.','final','Record Final Approval'],['Ready to publish','Record the final live URL or delivered HTML and close the job.','delivery','Record Delivery & Close'],['Project closed','Original project is complete. Create a separate modification for future paid changes.','modification','＋ New Modification']];
+  const actions=[['Initial inquiry','Reach out by phone or email, then confirm Contacted.','contact:'+p.id,'Mark Contacted'],['Discovery recorded','You can return to discovery at any time, even after sending the offer.','offer','Prepare Personalized Offer'],['Discovery recorded','Prepare a branded offer based on the agreed scope.','offer','Create Personalized Offer'],['Offer draft saved','Opens Gmail with the customer recipient, your sender account, and subject prefilled. Attach the downloaded offer HTML, then send.','offer-email','Preview & Send Branded Offer'],['Offer sent — awaiting customer','Once the approval email arrives, import it and confirm the details.','import-approval','Import Approval Email'],['Acceptance recorded','Request payment, then record verified full payment.','payment','Record Verified Payment'],['Paid — ready to start','Start the approved project.','start','Start Build'],['Build in progress','Share a preview with the customer for feedback.','review','Send for Customer Review'],['Customer reviewing','After revisions, record the customer’s final authorization to publish.','final','Record Final Approval'],['Ready to publish','Record the final live URL or delivered HTML and close the job.','delivery','Record Delivery & Close'],['Project closed','Original project is complete. Create a separate modification for future paid changes.','modification','＋ New Modification']];
   let [title,desc,cmd,label]=actions[s]||actions[1];
   const browsingPast=actualS!=null&&s<actualS;
   const browsingFuture=actualS!=null&&s>actualS;
@@ -101,7 +101,7 @@ function actionBox(p,q,s,actualS){actualS=actualS==null?s:actualS;
   if(browsingPast&&s!==3)return `<h2>${title}</h2><p>${desc}</p><p class="muted tiny">Browsing a completed stage. Use the arrows to return to the current next action.</p><div class="row">${q?.offer?`<button class="button" data-cmd="${q.accepted?'preview':'offer'}">${q.accepted?'View Offer':'Edit offer'}</button>`:''}</div>`;
   // Offer draft: keep preview/edit, plus explicit mark-sent to unlock Approval.
   if(s===3&&q?.offer&&!q.offer.sentAt){
-    return `<h2>${title}</h2><p>${desc}</p><div class="row"><button class="button primary" data-cmd="preview">Preview & Send Branded Offer →</button><button class="button" data-cmd="offer-sent">I've sent the offer</button><button class="button" data-cmd="offer">Edit offer</button></div>`;
+    return `<h2>${title}</h2><p>${desc}</p><div class="row"><button class="button primary" data-cmd="offer-email">Preview & Send Branded Offer →</button><button class="button" data-cmd="offer-sent">I've sent the offer</button><button class="button" data-cmd="offer">Edit offer</button></div>`;
   }
   if(s===3&&q?.offer?.sentAt){
     return `<h2>Offer sent — awaiting customer</h2><p>Proposal v${esc(q.offer.version)} was marked sent. Import the customer approval email when it arrives, or use the arrows to review other stages.</p><div class="row"><button class="button primary" data-cmd="import-approval">Import Approval Email →</button><button class="button" data-cmd="preview">View Offer</button></div>`;
@@ -260,13 +260,36 @@ async function filePut(item){let db=await openDb();return new Promise((resolve,r
 async function fileGet(fid){let db=await openDb();return new Promise((resolve,reject)=>{let t=db.transaction('files','readonly'),r=t.objectStore('files').get(fid);r.onsuccess=()=>{db.close();resolve(r.result)};r.onerror=()=>{db.close();reject(r.error)}})}
 function findFile(fid){for(const p of state.people){let f=[...(p.files||[]),...p.projects.flatMap(q=>q.files||[])].find(x=>x.id===fid);if(f)return {f,p}}return null}
 async function serveFile(fid,viewIt){let entry=findFile(fid);if(!entry)return alert('File metadata not found');try{let f=await fileGet(fid);if(!f?.blob)return alert('File content is unavailable in this browser.');let u=URL.createObjectURL(f.blob);if(viewIt&&(/image\//.test(f.type)||f.type==='application/pdf')){let opened=window.open(u,'_blank');if(!opened)alert('The browser blocked the preview. Try Download instead.');setTimeout(()=>URL.revokeObjectURL(u),60000)}else{dl(f.blob,entry.f.name);URL.revokeObjectURL(u)}}catch(e){alert('Cannot retrieve this browser-local file: '+e.message)}}
-function openGmailDraft(to,subject,body){
+function openGmailDraft(to,subject,body,from){
   // Gmail opens a draft in the signed-in Google account; it does not send the message.
-  const url='https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(to)+'&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  // authuser helps select the sender account when multiple Google accounts are signed in.
+  let url='https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(to||'')+'&su='+encodeURIComponent(subject||'')+'&body='+encodeURIComponent(body||'');
+  if(from) url+='&authuser='+encodeURIComponent(from);
   const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';document.body.appendChild(a);a.click();a.remove();
 }
 function emailIntro(cid){let p=state.people.find(x=>x.id===cid),sub=`StorySites™ — Let's talk about your idea`,b=`Hello ${p.name},\n\nThank you for your interest in StorySites. I'd love to learn more about what you have in mind and discuss what your personalized site might include.\n\nWould you be available for a brief phone call? Please share a couple of days and times that work for you.\n\nThank you,\nRichard\nFOOVISION LLC · StorySites™`;openGmailDraft(p.email,sub,b)}
-function offerEmail(){let p=person(),q=project(p),o=q.offer;let b=`Hello ${p.name},\n\nThank you for discussing your StorySite with me. Attached is your personalized StorySites offer (proposal v${o.version}) including the service terms (${o.termsVersion}).\n\nPlease review the scope, deliverables, total price (${money(o.total)}) and terms. To approve, open the attached HTML offer in a browser and click the “Approve Proposal & Cost” button. It prepares an approval email for you to review and SEND. Alternatively, reply explicitly approving proposal v${o.version}, the scope of work, total price and terms. Once approval is received, I'll send the payment information.\n\nThank you,\nRichard\nFOOVISION LLC · StorySites™\n\nNOTE: Attach the downloaded offer before sending.`;openGmailDraft(p.email,'StorySites™ Personalized Offer — '+q.id+' v'+o.version,b)}
+function offerEmail(){
+  let p=person(),q=project(p);if(!p||!q?.offer)return alert('Save an offer draft first.');
+  const o=q.offer;
+  state.meta=state.meta||{};
+  let sender=String(state.meta.senderEmail||state.meta.approvalEmail||'').trim();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sender)){
+    const entered=String(prompt('Enter the StorySites / FOOVISION Gmail address this offer should be sent from (sender):','')||'').trim();
+    if(!entered)return;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(entered))return alert('Enter a valid sender email address.');
+    sender=entered;
+    state.meta.senderEmail=sender;
+    if(!state.meta.approvalEmail) state.meta.approvalEmail=sender;
+    persist();
+  }else if(!state.meta.senderEmail){
+    state.meta.senderEmail=sender;persist();
+  }
+  // Download the HTML offer so it can be attached in Gmail.
+  downloadCustomerOffer();
+  const subject='StorySites™ Personalized Offer — '+q.id+' v'+o.version;
+  const body=`Hello ${p.name},\n\nThank you for discussing your StorySite with me. Attached is your personalized StorySites offer (proposal v${o.version}) including the service terms (${o.termsVersion}).\n\nPlease review the scope, deliverables, total price (${money(o.total)}) and terms. To approve, open the attached HTML offer in a browser and click the “Approve Proposal & Cost” button. It prepares an approval email for you to review and SEND. Alternatively, reply explicitly approving proposal v${o.version}, the scope of work, total price and terms. Once approval is received, I'll send the payment information.\n\nThank you,\nRichard\nFOOVISION LLC · StorySites™\nSender: ${sender}\n\nNOTE: Attach the downloaded offer HTML before sending.`;
+  openGmailDraft(p.email,subject,body,sender);
+}
 function backup(){dl(new Blob([JSON.stringify({format:'StorySites-Simple-v1',exported:now(),records:state},null,2)],{type:'application/json'}),'StorySites_Simple_Demo_Backup.json')}
 function run(cmd){let [a,ref]=cmd.split(':');let p=person(),q=project(p);if(a==='close')return closeModal();
 if(a==='stage-prev'||a==='stage-next'||a==='stage-goto'){
